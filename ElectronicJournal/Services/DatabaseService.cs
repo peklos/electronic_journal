@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using ElectronicJournal.Models;
 
 namespace ElectronicJournal.Services
@@ -23,7 +23,7 @@ namespace ElectronicJournal.Services
                     Directory.CreateDirectory(dbDirectory);
                 }
 
-                _connectionString = $"Data Source={dbPath};Version=3;";
+                _connectionString = $"Data Source={dbPath}";
                 InitializeDatabase();
             }
             catch (Exception ex)
@@ -34,7 +34,7 @@ namespace ElectronicJournal.Services
 
         private void InitializeDatabase()
         {
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string createTables = @"
@@ -85,12 +85,12 @@ namespace ElectronicJournal.Services
                 );
             ";
 
-            using var command = new SQLiteCommand(createTables, connection);
+            using var command = new SqliteCommand(createTables, connection);
             command.ExecuteNonQuery();
 
             // Добавим тестового учителя, если база пустая
             string checkUsers = "SELECT COUNT(*) FROM Users";
-            using var checkCommand = new SQLiteCommand(checkUsers, connection);
+            using var checkCommand = new SqliteCommand(checkUsers, connection);
             long userCount = (long)checkCommand.ExecuteScalar()!;
 
             if (userCount == 0)
@@ -149,7 +149,7 @@ namespace ElectronicJournal.Services
                     ('ivanov', 'ivanov', 'Иванов Петр Сергеевич', 'Ученик', 1);
                 ";
 
-                using var insertCommand = new SQLiteCommand(insertDefaultData, connection);
+                using var insertCommand = new SqliteCommand(insertDefaultData, connection);
                 insertCommand.ExecuteNonQuery();
             }
         }
@@ -157,11 +157,11 @@ namespace ElectronicJournal.Services
         // Методы для работы с пользователями
         public User? AuthenticateUser(string username, string password)
         {
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = "SELECT * FROM Users WHERE Username = @username AND Password = @password";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             command.Parameters.AddWithValue("@username", username);
             command.Parameters.AddWithValue("@password", password);
 
@@ -186,11 +186,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "INSERT INTO Users (Username, Password, FullName, Role, StudentId) VALUES (@username, @password, @fullName, @role, @studentId)";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", password);
                 command.Parameters.AddWithValue("@fullName", fullName);
@@ -211,11 +211,11 @@ namespace ElectronicJournal.Services
         {
             var students = new List<Student>();
 
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = "SELECT * FROM Students ORDER BY Class, FullName";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             using var reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -237,11 +237,11 @@ namespace ElectronicJournal.Services
 
         public Student? GetStudentById(int id)
         {
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = "SELECT * FROM Students WHERE Id = @id";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             command.Parameters.AddWithValue("@id", id);
             using var reader = command.ExecuteReader();
 
@@ -266,11 +266,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "INSERT INTO Students (FullName, Class, BirthDate, ParentPhone, Address, Notes) VALUES (@fullName, @class, @birthDate, @parentPhone, @address, @notes)";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@fullName", student.FullName);
                 command.Parameters.AddWithValue("@class", student.Class);
                 command.Parameters.AddWithValue("@birthDate", student.BirthDate.ToString("yyyy-MM-dd"));
@@ -291,11 +291,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "UPDATE Students SET FullName = @fullName, Class = @class, BirthDate = @birthDate, ParentPhone = @parentPhone, Address = @address, Notes = @notes WHERE Id = @id";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", student.Id);
                 command.Parameters.AddWithValue("@fullName", student.FullName);
                 command.Parameters.AddWithValue("@class", student.Class);
@@ -317,11 +317,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "DELETE FROM Students WHERE Id = @id";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", id);
 
                 command.ExecuteNonQuery();
@@ -338,7 +338,7 @@ namespace ElectronicJournal.Services
         {
             var grades = new List<Grade>();
 
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = @"SELECT g.*, s.FullName, sub.Name
@@ -347,7 +347,7 @@ namespace ElectronicJournal.Services
                            LEFT JOIN Subjects sub ON g.SubjectId = sub.Id
                            WHERE g.StudentId = @studentId
                            ORDER BY g.Date DESC";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             command.Parameters.AddWithValue("@studentId", studentId);
             using var reader = command.ExecuteReader();
 
@@ -374,7 +374,7 @@ namespace ElectronicJournal.Services
         {
             var grades = new List<Grade>();
 
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = @"SELECT g.*, s.FullName, sub.Name
@@ -382,7 +382,7 @@ namespace ElectronicJournal.Services
                            LEFT JOIN Students s ON g.StudentId = s.Id
                            LEFT JOIN Subjects sub ON g.SubjectId = sub.Id
                            ORDER BY g.Date DESC";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             using var reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -408,11 +408,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "INSERT INTO Grades (StudentId, SubjectId, GradeValue, Date, Topic, Notes) VALUES (@studentId, @subjectId, @gradeValue, @date, @topic, @notes)";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@studentId", grade.StudentId);
                 command.Parameters.AddWithValue("@subjectId", grade.SubjectId);
                 command.Parameters.AddWithValue("@gradeValue", grade.GradeValue);
@@ -433,11 +433,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "DELETE FROM Grades WHERE Id = @id";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", id);
 
                 command.ExecuteNonQuery();
@@ -454,7 +454,7 @@ namespace ElectronicJournal.Services
         {
             var attendance = new List<Attendance>();
 
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = @"SELECT a.*, s.FullName
@@ -462,7 +462,7 @@ namespace ElectronicJournal.Services
                            LEFT JOIN Students s ON a.StudentId = s.Id
                            WHERE a.StudentId = @studentId
                            ORDER BY a.Date DESC";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             command.Parameters.AddWithValue("@studentId", studentId);
             using var reader = command.ExecuteReader();
 
@@ -486,14 +486,14 @@ namespace ElectronicJournal.Services
         {
             var attendance = new List<Attendance>();
 
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = @"SELECT a.*, s.FullName
                            FROM Attendance a
                            LEFT JOIN Students s ON a.StudentId = s.Id
                            ORDER BY a.Date DESC";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             using var reader = command.ExecuteReader();
 
             while (reader.Read())
@@ -516,11 +516,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "INSERT INTO Attendance (StudentId, Date, Status, Reason) VALUES (@studentId, @date, @status, @reason)";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@studentId", attendance.StudentId);
                 command.Parameters.AddWithValue("@date", attendance.Date.ToString("yyyy-MM-dd"));
                 command.Parameters.AddWithValue("@status", attendance.Status);
@@ -539,11 +539,11 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                using var connection = new SQLiteConnection(_connectionString);
+                using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
                 string query = "DELETE FROM Attendance WHERE Id = @id";
-                using var command = new SQLiteCommand(query, connection);
+                using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", id);
 
                 command.ExecuteNonQuery();
@@ -560,11 +560,11 @@ namespace ElectronicJournal.Services
         {
             var subjects = new List<Subject>();
 
-            using var connection = new SQLiteConnection(_connectionString);
+            using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
             string query = "SELECT * FROM Subjects ORDER BY Name";
-            using var command = new SQLiteCommand(query, connection);
+            using var command = new SqliteCommand(query, connection);
             using var reader = command.ExecuteReader();
 
             while (reader.Read())
