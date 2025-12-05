@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
-        <!-- Цветовая схема -->
-        <SolidColorBrush x:Key="PrimaryColor" Color="#2C3E50"/>
-        <SolidColorBrush x:Key="SecondaryColor" Color="#3498DB"/>
-        <SolidColorBrush x:Key="AccentColor" Color="#E74C3C"/>
-        <SolidColorBrush x:Key="SuccessColor" Color="#27AE60"/>
-        <SolidColorBrush x:Key="BackgroundColor" Color="#ECF0F1"/>
-        <SolidColorBrush x:Key="TextColor" Color="#2C3E50"/>
-        <SolidColorBrush x:Key="LightTextColor" Color="#7F8C8D"/>
+        <!-- Темная цветовая схема -->
+        <SolidColorBrush x:Key="PrimaryColor" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="SecondaryColor" Color="#3794FF"/>
+        <SolidColorBrush x:Key="AccentColor" Color="#FF5252"/>
+        <SolidColorBrush x:Key="SuccessColor" Color="#4CAF50"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#121212"/>
+        <SolidColorBrush x:Key="SurfaceColor" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="TextColor" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="LightTextColor" Color="#B0B0B0"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#333333"/>
 
         <!-- Стиль для кнопок -->
         <Style x:Key="ModernButton" TargetType="Button">
@@ -46,12 +48,14 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderBrush" Value="{StaticResource LightTextColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="Background" Value="{StaticResource SurfaceColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border Background="White"
+                        <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="5">
@@ -68,12 +72,14 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderBrush" Value="{StaticResource LightTextColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="Background" Value="{StaticResource SurfaceColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="PasswordBox">
-                        <Border Background="White"
+                        <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="5">
@@ -102,9 +108,10 @@
             <Setter Property="GridLinesVisibility" Value="None"/>
             <Setter Property="HeadersVisibility" Value="Column"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="RowBackground" Value="White"/>
-            <Setter Property="AlternatingRowBackground" Value="#F7F9FA"/>
+            <Setter Property="Background" Value="{StaticResource SurfaceColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="RowBackground" Value="{StaticResource SurfaceColor}"/>
+            <Setter Property="AlternatingRowBackground" Value="#252525"/>
             <Setter Property="FontSize" Value="13"/>
         </Style>
     </Application.Resources>

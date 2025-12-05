@@ -31,8 +31,10 @@ namespace ElectronicJournal
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            Exception ex = e.ExceptionObject as Exception;
-            string errorMessage = $"Критическая ошибка:\n\n{ex?.Message}\n\nПодробности:\n{ex?.StackTrace}";
+            Exception? ex = e.ExceptionObject as Exception;
+            string errorMessage = ex != null
+                ? $"Критическая ошибка:\n\n{ex.Message}\n\nПодробности:\n{ex.StackTrace}"
+                : "Критическая ошибка: Неизвестная ошибка";
 
             MessageBox.Show(errorMessage,
                           "Критическая ошибка",

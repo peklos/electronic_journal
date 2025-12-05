@@ -27,7 +27,7 @@ jobs:
       run: dotnet build ElectronicJournal/ElectronicJournal.csproj --configuration Release --no-restore
 
     - name: Publish as single executable
-      run: dotnet publish ElectronicJournal/ElectronicJournal.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:PublishReadyToRun=true -o ./publish
+      run: dotnet publish ElectronicJournal/ElectronicJournal.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:EnableCompressionInSingleFile=true -o ./publish
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
