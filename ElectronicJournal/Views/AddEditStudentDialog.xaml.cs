@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using ElectronicJournal.Models;
 using ElectronicJournal.Services;

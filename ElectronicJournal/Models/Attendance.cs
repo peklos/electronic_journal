@@ -1,3 +1,5 @@
+using System;
+
 namespace ElectronicJournal.Models
 {
     public class Attendance
