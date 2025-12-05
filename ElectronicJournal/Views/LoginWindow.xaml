@@ -18,14 +18,14 @@
                 Background="{StaticResource PrimaryColor}"
                 Padding="20">
             <StackPanel>
-                <TextBlock Text="📚 Электронный журнал"
+                <TextBlock Text="Электронный журнал"
                           FontSize="24"
                           FontWeight="Bold"
-                          Foreground="White"
+                          Foreground="{StaticResource TextColor}"
                           HorizontalAlignment="Center"/>
                 <TextBlock Text="БППК - Система управления классом"
                           FontSize="12"
-                          Foreground="#BDC3C7"
+                          Foreground="{StaticResource LightTextColor}"
                           HorizontalAlignment="Center"
                           Margin="0,5,0,0"/>
             </StackPanel>
@@ -33,14 +33,14 @@
 
         <!-- Форма входа -->
         <Border Grid.Row="1"
-                Background="White"
+                Background="{StaticResource SurfaceColor}"
                 Margin="30"
                 CornerRadius="10"
                 Padding="30">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20"
                                 Color="#000000"
-                                Opacity="0.1"
+                                Opacity="0.5"
                                 ShadowDepth="0"/>
             </Border.Effect>
 
@@ -79,7 +79,7 @@
                         Margin="0,20,0,0"
                         Click="LoginButton_Click"/>
 
-                <Separator Margin="0,20,0,20"/>
+                <Separator Margin="0,20,0,20" Background="{StaticResource BorderColor}"/>
 
                 <TextBlock HorizontalAlignment="Center">
                     <Run Text="Нет аккаунта?"
@@ -92,14 +92,14 @@
                     </Hyperlink>
                 </TextBlock>
 
-                <Border Background="#E8F5E9"
+                <Border Background="#1B5E20"
                         BorderBrush="{StaticResource SuccessColor}"
                         BorderThickness="1"
                         CornerRadius="5"
                         Padding="10"
                         Margin="0,20,0,0">
                     <StackPanel>
-                        <TextBlock Text="ℹ Тестовый доступ:"
+                        <TextBlock Text="Тестовый доступ:"
                                   FontSize="12"
                                   FontWeight="SemiBold"
                                   Foreground="{StaticResource SuccessColor}"/>

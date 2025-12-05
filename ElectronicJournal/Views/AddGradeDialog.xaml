@@ -19,7 +19,7 @@
         </Border.Effect>
 
         <StackPanel>
-            <TextBlock Text="📝 Добавить оценку"
+            <TextBlock Text="Добавить оценку"
                       FontSize="20"
                       FontWeight="SemiBold"
                       Foreground="{StaticResource TextColor}"

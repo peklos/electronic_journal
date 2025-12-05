@@ -19,7 +19,7 @@
         </Border.Effect>
 
         <StackPanel>
-            <TextBlock Text="📅 Отметить посещаемость"
+            <TextBlock Text="Отметить посещаемость"
                       FontSize="20"
                       FontWeight="SemiBold"
                       Foreground="{StaticResource TextColor}"
@@ -49,9 +49,9 @@
             <ComboBox x:Name="StatusComboBox"
                      Style="{StaticResource ModernComboBox}"
                      SelectionChanged="StatusComboBox_SelectionChanged">
-                <ComboBoxItem Content="✅ Присутствовал" Tag="Присутствовал" IsSelected="True"/>
-                <ComboBoxItem Content="❌ Отсутствовал" Tag="Отсутствовал"/>
-                <ComboBoxItem Content="⚠️ По уважительной причине" Tag="По уважительной причине"/>
+                <ComboBoxItem Content="Присутствовал" Tag="Присутствовал" IsSelected="True"/>
+                <ComboBoxItem Content="Отсутствовал" Tag="Отсутствовал"/>
+                <ComboBoxItem Content="По уважительной причине" Tag="По уважительной причине"/>
             </ComboBox>
 
             <TextBlock Text="Причина отсутствия"

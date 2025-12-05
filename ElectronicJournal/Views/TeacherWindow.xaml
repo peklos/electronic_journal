@@ -19,7 +19,7 @@
                 Padding="20">
             <Grid>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="👨‍🏫"
+                    <TextBlock Text=""
                               FontSize="28"
                               VerticalAlignment="Center"
                               Margin="0,0,10,0"/>
@@ -48,7 +48,7 @@
                    Background="White"
                    BorderThickness="0">
             <!-- Вкладка: Ученики -->
-            <TabItem Header="👥 Ученики" FontSize="14" Padding="15,10">
+            <TabItem Header="Ученики" FontSize="14" Padding="15,10">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -58,18 +58,18 @@
 
                     <!-- Управление студентами -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="➕ Добавить ученика"
+                        <Button Content="Добавить ученика"
                                 Style="{StaticResource ModernButton}"
                                 Click="AddStudentButton_Click"/>
-                        <Button Content="✏️ Редактировать"
+                        <Button Content="Редактировать"
                                 Style="{StaticResource ModernButton}"
                                 Background="{StaticResource SuccessColor}"
                                 Click="EditStudentButton_Click"/>
-                        <Button Content="🗑️ Удалить"
+                        <Button Content="Удалить"
                                 Style="{StaticResource ModernButton}"
                                 Background="{StaticResource AccentColor}"
                                 Click="DeleteStudentButton_Click"/>
-                        <Button Content="🔄 Обновить"
+                        <Button Content="Обновить"
                                 Style="{StaticResource ModernButton}"
                                 Background="{StaticResource LightTextColor}"
                                 Click="RefreshStudentsButton_Click"/>
@@ -99,7 +99,7 @@
             </TabItem>
 
             <!-- Вкладка: Оценки -->
-            <TabItem Header="📊 Оценки" FontSize="14" Padding="15,10">
+            <TabItem Header="Оценки" FontSize="14" Padding="15,10">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -109,14 +109,14 @@
 
                     <!-- Управление оценками -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="➕ Добавить оценку"
+                        <Button Content="Добавить оценку"
                                 Style="{StaticResource ModernButton}"
                                 Click="AddGradeButton_Click"/>
-                        <Button Content="🗑️ Удалить оценку"
+                        <Button Content="Удалить оценку"
                                 Style="{StaticResource ModernButton}"
                                 Background="{StaticResource AccentColor}"
                                 Click="DeleteGradeButton_Click"/>
-                        <Button Content="🔄 Обновить"
+                        <Button Content="Обновить"
                                 Style="{StaticResource ModernButton}"
                                 Background="{StaticResource LightTextColor}"
                                 Click="RefreshGradesButton_Click"/>
@@ -178,7 +178,7 @@
             </TabItem>
 
             <!-- Вкладка: Посещаемость -->
-            <TabItem Header="📅 Посещаемость" FontSize="14" Padding="15,10">
+            <TabItem Header="Посещаемость" FontSize="14" Padding="15,10">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -188,14 +188,14 @@
 
                     <!-- Управление посещаемостью -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="➕ Отметить посещаемость"
+                        <Button Content="Отметить посещаемость"
                                 Style="{StaticResource ModernButton}"
                                 Click="AddAttendanceButton_Click"/>
-                        <Button Content="🗑️ Удалить запись"
+                        <Button Content="Удалить запись"
                                 Style="{StaticResource ModernButton}"
                                 Background="{StaticResource AccentColor}"
                                 Click="DeleteAttendanceButton_Click"/>
-                        <Button Content="🔄 Обновить"
+                        <Button Content="Обновить"
                                 Style="{StaticResource ModernButton}"
                                 Background="{StaticResource LightTextColor}"
                                 Click="RefreshAttendanceButton_Click"/>

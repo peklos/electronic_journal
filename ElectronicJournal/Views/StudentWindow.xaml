@@ -19,7 +19,7 @@
                 Padding="20">
             <Grid>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="🎓"
+                    <TextBlock Text=""
                               FontSize="28"
                               VerticalAlignment="Center"
                               Margin="0,0,10,0"/>
@@ -48,7 +48,7 @@
                    Background="White"
                    BorderThickness="0">
             <!-- Вкладка: Личная информация -->
-            <TabItem Header="👤 Личная информация" FontSize="14" Padding="15,10">
+            <TabItem Header="Личная информация" FontSize="14" Padding="15,10">
                 <Border Margin="30" Background="White">
                     <StackPanel MaxWidth="600">
                         <TextBlock Text="📋 Моя информация"
@@ -143,7 +143,7 @@
                                 Padding="20"
                                 Margin="0,30,0,0">
                             <StackPanel>
-                                <TextBlock Text="📊 Моя статистика"
+                                <TextBlock Text="Моя статистика"
                                           FontSize="18"
                                           FontWeight="SemiBold"
                                           Foreground="{StaticResource SuccessColor}"
@@ -190,7 +190,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="🔄 Обновить"
+                        <Button Content="Обновить"
                                 Style="{StaticResource ModernButton}"
                                 Click="RefreshGradesButton_Click"/>
                         <TextBlock x:Name="GradesInfoTextBlock"
@@ -237,7 +237,7 @@
             </TabItem>
 
             <!-- Вкладка: Моя посещаемость -->
-            <TabItem Header="📅 Моя посещаемость" FontSize="14" Padding="15,10">
+            <TabItem Header="Моя посещаемость" FontSize="14" Padding="15,10">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -245,7 +245,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="🔄 Обновить"
+                        <Button Content="Обновить"
                                 Style="{StaticResource ModernButton}"
                                 Click="RefreshAttendanceButton_Click"/>
                         <TextBlock x:Name="AttendanceInfoTextBlock"
