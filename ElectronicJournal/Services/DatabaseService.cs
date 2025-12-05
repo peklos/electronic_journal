@@ -13,16 +13,23 @@ namespace ElectronicJournal.Services
 
         public DatabaseService()
         {
-            string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "electronic_journal.db");
-            string dbDirectory = Path.GetDirectoryName(dbPath)!;
-
-            if (!Directory.Exists(dbDirectory))
+            try
             {
-                Directory.CreateDirectory(dbDirectory);
-            }
+                string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "electronic_journal.db");
+                string dbDirectory = Path.GetDirectoryName(dbPath)!;
 
-            _connectionString = $"Data Source={dbPath};Version=3;";
-            InitializeDatabase();
+                if (!Directory.Exists(dbDirectory))
+                {
+                    Directory.CreateDirectory(dbDirectory);
+                }
+
+                _connectionString = $"Data Source={dbPath};Version=3;";
+                InitializeDatabase();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Ошибка инициализации базы данных: {ex.Message}", ex);
+            }
         }
 
         private void InitializeDatabase()
