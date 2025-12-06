@@ -7,7 +7,7 @@
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         Background="{StaticResource BackgroundColor}">
-    <Border Background="White"
+    <Border Background="{StaticResource SurfaceColor}"
             Margin="20"
             CornerRadius="10"
             Padding="30">

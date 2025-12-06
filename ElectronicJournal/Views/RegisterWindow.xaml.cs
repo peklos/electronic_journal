@@ -24,6 +24,8 @@ namespace ElectronicJournal.Views
 
         private void RoleComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (StudentSelectionPanel == null) return; // Еще не загружено
+
             if (RoleComboBox.SelectedIndex == 1) // Ученик
             {
                 StudentSelectionPanel.Visibility = Visibility.Visible;
@@ -36,6 +38,12 @@ namespace ElectronicJournal.Views
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
+            if (RoleComboBox.SelectedItem == null)
+            {
+                ErrorTextBlock.Text = "Пожалуйста, выберите роль";
+                return;
+            }
+
             string username = UsernameTextBox.Text.Trim();
             string password = PasswordBox.Password;
             string confirmPassword = ConfirmPasswordBox.Password;

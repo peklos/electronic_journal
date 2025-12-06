@@ -27,7 +27,7 @@
                         <TextBlock x:Name="WelcomeTextBlock"
                                   FontSize="20"
                                   FontWeight="Bold"
-                                  Foreground="White"/>
+                                  Foreground="{StaticResource TextColor}"/>
                         <TextBlock Text="Личный кабинет ученика"
                                   FontSize="12"
                                   Foreground="#BDC3C7"/>
@@ -45,11 +45,11 @@
         <!-- Главный контент с вкладками -->
         <TabControl Grid.Row="1"
                    Margin="20"
-                   Background="White"
+                   Background="{StaticResource SurfaceColor}"
                    BorderThickness="0">
             <!-- Вкладка: Личная информация -->
             <TabItem Header="Личная информация" FontSize="14" Padding="15,10">
-                <Border Margin="30" Background="White">
+                <Border Margin="30" Background="{StaticResource SurfaceColor}">
                     <StackPanel MaxWidth="600">
                         <TextBlock Text="📋 Моя информация"
                                   FontSize="24"
