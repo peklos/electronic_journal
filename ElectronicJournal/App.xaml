@@ -10,9 +10,10 @@
         <SolidColorBrush x:Key="SuccessColor" Color="#4CAF50"/>
         <SolidColorBrush x:Key="BackgroundColor" Color="#121212"/>
         <SolidColorBrush x:Key="SurfaceColor" Color="#1E1E1E"/>
-        <SolidColorBrush x:Key="TextColor" Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="InputBackground" Color="#2D2D2D"/>
+        <SolidColorBrush x:Key="TextColor" Color="#FFFFFF"/>
         <SolidColorBrush x:Key="LightTextColor" Color="#B0B0B0"/>
-        <SolidColorBrush x:Key="BorderColor" Color="#333333"/>
+        <SolidColorBrush x:Key="BorderColor" Color="#444444"/>
 
         <!-- Стиль для кнопок -->
         <Style x:Key="ModernButton" TargetType="Button">
@@ -48,10 +49,11 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="Background" Value="{StaticResource SurfaceColor}"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+            <Setter Property="CaretBrush" Value="#FFFFFF"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -60,7 +62,8 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="5">
                             <ScrollViewer x:Name="PART_ContentHost"
-                                        Margin="{TemplateBinding Padding}"/>
+                                        Margin="{TemplateBinding Padding}"
+                                        Foreground="{TemplateBinding Foreground}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -72,10 +75,11 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
-            <Setter Property="Background" Value="{StaticResource SurfaceColor}"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
+            <Setter Property="CaretBrush" Value="#FFFFFF"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="PasswordBox">
@@ -84,7 +88,8 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="5">
                             <ScrollViewer x:Name="PART_ContentHost"
-                                        Margin="{TemplateBinding Padding}"/>
+                                        Margin="{TemplateBinding Padding}"
+                                        Foreground="{TemplateBinding Foreground}"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -96,6 +101,8 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="10"/>
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="Foreground" Value="#FFFFFF"/>
+            <Setter Property="Background" Value="{StaticResource InputBackground}"/>
         </Style>
 
         <!-- Стиль для DataGrid -->
