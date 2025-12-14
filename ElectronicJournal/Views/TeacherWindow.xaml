@@ -127,7 +127,8 @@
                         <TextBlock Text="Фильтр по ученику:"
                                   VerticalAlignment="Center"
                                   Margin="0,0,10,0"
-                                  FontSize="13"/>
+                                  FontSize="13"
+                                  Foreground="{StaticResource TextColor}"/>
                         <ComboBox x:Name="GradeFilterComboBox"
                                  Width="250"
                                  Style="{StaticResource ModernComboBox}"
@@ -206,7 +207,8 @@
                         <TextBlock Text="Фильтр по ученику:"
                                   VerticalAlignment="Center"
                                   Margin="0,0,10,0"
-                                  FontSize="13"/>
+                                  FontSize="13"
+                                  Foreground="{StaticResource TextColor}"/>
                         <ComboBox x:Name="AttendanceFilterComboBox"
                                  Width="250"
                                  Style="{StaticResource ModernComboBox}"
