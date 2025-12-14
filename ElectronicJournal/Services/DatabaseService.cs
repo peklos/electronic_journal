@@ -50,7 +50,7 @@ namespace ElectronicJournal.Services
                 CREATE TABLE IF NOT EXISTS Students (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     FullName TEXT NOT NULL,
-                    "Group" TEXT NOT NULL,
+                    [Group] TEXT NOT NULL,
                     BirthDate TEXT NOT NULL,
                     ParentPhone TEXT,
                     Address TEXT,
@@ -106,7 +106,7 @@ namespace ElectronicJournal.Services
                     ('История', 'Васильева В.В.'),
                     ('Английский язык', 'Смирнова С.С.');
 
-                    INSERT INTO Students (FullName, "Group", BirthDate, ParentPhone, Address, Notes) VALUES
+                    INSERT INTO Students (FullName, [Group], BirthDate, ParentPhone, Address, Notes) VALUES
                     ('Иванов Петр Сергеевич', '3ИС1-23', '2005-05-15', '+7 999 123-45-67', 'ул. Ленина, д. 10, кв. 5', 'Отличник'),
                     ('Петрова Мария Ивановна', '3ИС-23', '2005-08-22', '+7 999 234-56-78', 'ул. Пушкина, д. 25, кв. 12', 'Активная ученица'),
                     ('Сидоров Александр Петрович', '2Ю-23', '2006-03-10', '+7 999 345-67-89', 'ул. Гагарина, д. 5, кв. 8', 'Спортсмен'),
@@ -214,7 +214,7 @@ namespace ElectronicJournal.Services
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
-            string query = "SELECT * FROM Students ORDER BY \"Group\", FullName";
+            string query = "SELECT * FROM Students ORDER BY [Group], FullName";
             using var command = new SqliteCommand(query, connection);
             using var reader = command.ExecuteReader();
 
@@ -269,7 +269,7 @@ namespace ElectronicJournal.Services
                 using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
-                string query = "INSERT INTO Students (FullName, \"Group\", BirthDate, ParentPhone, Address, Notes) VALUES (@fullName, @group, @birthDate, @parentPhone, @address, @notes)";
+                string query = "INSERT INTO Students (FullName, [Group], BirthDate, ParentPhone, Address, Notes) VALUES (@fullName, @group, @birthDate, @parentPhone, @address, @notes)";
                 using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@fullName", student.FullName);
                 command.Parameters.AddWithValue("@group", student.Group);
@@ -294,7 +294,7 @@ namespace ElectronicJournal.Services
                 using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
-                string query = "UPDATE Students SET FullName = @fullName, \"Group\" = @group, BirthDate = @birthDate, ParentPhone = @parentPhone, Address = @address, Notes = @notes WHERE Id = @id";
+                string query = "UPDATE Students SET FullName = @fullName, [Group] = @group, BirthDate = @birthDate, ParentPhone = @parentPhone, Address = @address, Notes = @notes WHERE Id = @id";
                 using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", student.Id);
                 command.Parameters.AddWithValue("@fullName", student.FullName);
