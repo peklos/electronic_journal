@@ -6,7 +6,7 @@ namespace ElectronicJournal.Models
     {
         public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
-        public string Class { get; set; } = string.Empty; // Класс (например "9-А")
+        public string Group { get; set; } = string.Empty; // Группа (например "3ИС1-23")
         public DateTime BirthDate { get; set; }
         public string ParentPhone { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;

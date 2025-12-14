@@ -34,11 +34,11 @@
             <TextBox x:Name="FullNameTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
-            <TextBlock Text="Класс (например: 9-А)"
+            <TextBlock Text="Группа (например: 3ИС1-23)"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,10,0,5"/>
-            <TextBox x:Name="ClassTextBox"
+            <TextBox x:Name="GroupTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
             <TextBlock Text="Дата рождения"

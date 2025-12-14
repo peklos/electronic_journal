@@ -28,7 +28,7 @@
                                   FontSize="20"
                                   FontWeight="Bold"
                                   Foreground="{StaticResource TextColor}"/>
-                        <TextBlock Text="Панель управления классного руководителя"
+                        <TextBlock Text="Панель управления куратора группы"
                                   FontSize="12"
                                   Foreground="#BDC3C7"/>
                     </StackPanel>
@@ -82,7 +82,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"/>
-                            <DataGridTextColumn Header="Класс" Binding="{Binding Class}" Width="100"/>
+                            <DataGridTextColumn Header="Группа" Binding="{Binding Group}" Width="120"/>
                             <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate, StringFormat=dd.MM.yyyy}" Width="150"/>
                             <DataGridTextColumn Header="Телефон родителя" Binding="{Binding ParentPhone}" Width="150"/>
                             <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="*"/>

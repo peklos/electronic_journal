@@ -22,7 +22,7 @@ namespace ElectronicJournal.Views
             {
                 TitleTextBlock.Text = "Редактировать ученика";
                 FullNameTextBox.Text = _studentToEdit.FullName;
-                ClassTextBox.Text = _studentToEdit.Class;
+                GroupTextBox.Text = _studentToEdit.Group;
                 BirthDatePicker.SelectedDate = _studentToEdit.BirthDate;
                 ParentPhoneTextBox.Text = _studentToEdit.ParentPhone;
                 AddressTextBox.Text = _studentToEdit.Address;
@@ -37,10 +37,10 @@ namespace ElectronicJournal.Views
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrWhiteSpace(FullNameTextBox.Text) ||
-                string.IsNullOrWhiteSpace(ClassTextBox.Text) ||
+                string.IsNullOrWhiteSpace(GroupTextBox.Text) ||
                 BirthDatePicker.SelectedDate == null)
             {
-                MessageBox.Show("Пожалуйста, заполните все обязательные поля (ФИО, Класс, Дата рождения)",
+                MessageBox.Show("Пожалуйста, заполните все обязательные поля (ФИО, Группа, Дата рождения)",
                               "Предупреждение",
                               MessageBoxButton.OK,
                               MessageBoxImage.Warning);
@@ -50,7 +50,7 @@ namespace ElectronicJournal.Views
             var student = new Student
             {
                 FullName = FullNameTextBox.Text.Trim(),
-                Class = ClassTextBox.Text.Trim(),
+                Group = GroupTextBox.Text.Trim(),
                 BirthDate = BirthDatePicker.SelectedDate.Value,
                 ParentPhone = ParentPhoneTextBox.Text.Trim(),
                 Address = AddressTextBox.Text.Trim(),
