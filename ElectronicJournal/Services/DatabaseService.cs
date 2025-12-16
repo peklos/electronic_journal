@@ -52,8 +52,13 @@ namespace ElectronicJournal.Services
                     FullName TEXT NOT NULL,
                     [Group] TEXT NOT NULL,
                     BirthDate TEXT NOT NULL,
-                    ParentPhone TEXT,
+                    Phone TEXT,
+                    Email TEXT,
+                    Passport TEXT,
                     Address TEXT,
+                    ParentName TEXT,
+                    ParentPhone TEXT,
+                    ParentWorkplace TEXT,
                     Notes TEXT
                 );
 
@@ -106,12 +111,12 @@ namespace ElectronicJournal.Services
                     ('История', 'Васильева В.В.'),
                     ('Английский язык', 'Смирнова С.С.');
 
-                    INSERT INTO Students (FullName, [Group], BirthDate, ParentPhone, Address, Notes) VALUES
-                    ('Иванов Петр Сергеевич', '3ИС1-23', '2005-05-15', '+7 999 123-45-67', 'ул. Ленина, д. 10, кв. 5', 'Отличник'),
-                    ('Петрова Мария Ивановна', '3ИС-23', '2005-08-22', '+7 999 234-56-78', 'ул. Пушкина, д. 25, кв. 12', 'Активная ученица'),
-                    ('Сидоров Александр Петрович', '2Ю-23', '2006-03-10', '+7 999 345-67-89', 'ул. Гагарина, д. 5, кв. 8', 'Спортсмен'),
-                    ('Козлова Анна Дмитриевна', '1ИС1-24', '2007-11-30', '+7 999 456-78-90', 'ул. Мира, д. 15, кв. 20', 'Творческая личность'),
-                    ('Смирнов Дмитрий Андреевич', '3ИС-23', '2005-07-18', '+7 999 567-89-01', 'ул. Советская, д. 8, кв. 3', 'Хороший ученик');
+                    INSERT INTO Students (FullName, [Group], BirthDate, Phone, Email, Passport, Address, ParentName, ParentPhone, ParentWorkplace, Notes) VALUES
+                    ('Иванов Петр Сергеевич', '3ИС1-23', '2005-05-15', '+7 900 111-22-33', 'ivanov.p@mail.ru', '1234 567890', 'ул. Ленина, д. 10, кв. 5', 'Иванов Сергей Петрович, Иванова Елена Владимировна', '+7 999 123-45-67', 'ООО "Техностар", инженер / Школа №5, учитель', 'Отличник'),
+                    ('Петрова Мария Ивановна', '3ИС-23', '2005-08-22', '+7 900 222-33-44', 'petrova.m@gmail.com', '1234 567891', 'ул. Пушкина, д. 25, кв. 12', 'Петров Иван Николаевич, Петрова Ольга Сергеевна', '+7 999 234-56-78', 'Банк "Открытие", менеджер / Поликлиника №3, врач', 'Активная студентка'),
+                    ('Сидоров Александр Петрович', '2Ю-23', '2006-03-10', '+7 900 333-44-55', 'sidorov.a@yandex.ru', '1234 567892', 'ул. Гагарина, д. 5, кв. 8', 'Сидоров Петр Александрович, Сидорова Наталья Ивановна', '+7 999 345-67-89', 'Завод "Прогресс", мастер / Магазин "Пятерочка", продавец', 'Спортсмен'),
+                    ('Козлова Анна Дмитриевна', '1ИС1-24', '2007-11-30', '+7 900 444-55-66', 'kozlova.a@mail.ru', '1234 567893', 'ул. Мира, д. 15, кв. 20', 'Козлов Дмитрий Викторович, Козлова Татьяна Сергеевна', '+7 999 456-78-90', 'ИП Козлов, директор / Салон красоты, парикмахер', 'Творческая личность'),
+                    ('Смирнов Дмитрий Андреевич', '3ИС-23', '2005-07-18', '+7 900 555-66-77', 'smirnov.d@gmail.com', '1234 567894', 'ул. Советская, д. 8, кв. 3', 'Смирнов Андрей Дмитриевич, Смирнова Людмила Петровна', '+7 999 567-89-01', 'АО "Энергосбыт", электрик / Детский сад №10, воспитатель', 'Хороший студент');
 
                     INSERT INTO Grades (StudentId, SubjectId, GradeValue, Date, Topic, Notes) VALUES
                     (1, 1, 5, '2025-12-01', 'Квадратные уравнения', 'Отлично решил все задачи'),
@@ -146,7 +151,7 @@ namespace ElectronicJournal.Services
                     (5, '2025-12-03', 'Присутствовал', '');
 
                     INSERT INTO Users (Username, Password, FullName, Role, StudentId) VALUES
-                    ('ivanov', 'ivanov', 'Иванов Петр Сергеевич', 'Ученик', 1);
+                    ('ivanov', 'ivanov', 'Иванов Петр Сергеевич', 'Студент', 1);
                 ";
 
                 using var insertCommand = new SqliteCommand(insertDefaultData, connection);
@@ -226,9 +231,14 @@ namespace ElectronicJournal.Services
                     FullName = reader.GetString(1),
                     Group = reader.GetString(2),
                     BirthDate = DateTime.Parse(reader.GetString(3)),
-                    ParentPhone = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
-                    Address = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                    Notes = reader.IsDBNull(6) ? string.Empty : reader.GetString(6)
+                    Phone = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
+                    Email = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
+                    Passport = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                    Address = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                    ParentName = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                    ParentPhone = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                    ParentWorkplace = reader.IsDBNull(10) ? string.Empty : reader.GetString(10),
+                    Notes = reader.IsDBNull(11) ? string.Empty : reader.GetString(11)
                 });
             }
 
@@ -253,9 +263,14 @@ namespace ElectronicJournal.Services
                     FullName = reader.GetString(1),
                     Group = reader.GetString(2),
                     BirthDate = DateTime.Parse(reader.GetString(3)),
-                    ParentPhone = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
-                    Address = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                    Notes = reader.IsDBNull(6) ? string.Empty : reader.GetString(6)
+                    Phone = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
+                    Email = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
+                    Passport = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                    Address = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                    ParentName = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                    ParentPhone = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                    ParentWorkplace = reader.IsDBNull(10) ? string.Empty : reader.GetString(10),
+                    Notes = reader.IsDBNull(11) ? string.Empty : reader.GetString(11)
                 };
             }
 
@@ -269,13 +284,18 @@ namespace ElectronicJournal.Services
                 using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
-                string query = "INSERT INTO Students (FullName, [Group], BirthDate, ParentPhone, Address, Notes) VALUES (@fullName, @group, @birthDate, @parentPhone, @address, @notes)";
+                string query = "INSERT INTO Students (FullName, [Group], BirthDate, Phone, Email, Passport, Address, ParentName, ParentPhone, ParentWorkplace, Notes) VALUES (@fullName, @group, @birthDate, @phone, @email, @passport, @address, @parentName, @parentPhone, @parentWorkplace, @notes)";
                 using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@fullName", student.FullName);
                 command.Parameters.AddWithValue("@group", student.Group);
                 command.Parameters.AddWithValue("@birthDate", student.BirthDate.ToString("yyyy-MM-dd"));
-                command.Parameters.AddWithValue("@parentPhone", student.ParentPhone);
+                command.Parameters.AddWithValue("@phone", student.Phone);
+                command.Parameters.AddWithValue("@email", student.Email);
+                command.Parameters.AddWithValue("@passport", student.Passport);
                 command.Parameters.AddWithValue("@address", student.Address);
+                command.Parameters.AddWithValue("@parentName", student.ParentName);
+                command.Parameters.AddWithValue("@parentPhone", student.ParentPhone);
+                command.Parameters.AddWithValue("@parentWorkplace", student.ParentWorkplace);
                 command.Parameters.AddWithValue("@notes", student.Notes);
 
                 command.ExecuteNonQuery();
@@ -294,14 +314,19 @@ namespace ElectronicJournal.Services
                 using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
-                string query = "UPDATE Students SET FullName = @fullName, [Group] = @group, BirthDate = @birthDate, ParentPhone = @parentPhone, Address = @address, Notes = @notes WHERE Id = @id";
+                string query = "UPDATE Students SET FullName = @fullName, [Group] = @group, BirthDate = @birthDate, Phone = @phone, Email = @email, Passport = @passport, Address = @address, ParentName = @parentName, ParentPhone = @parentPhone, ParentWorkplace = @parentWorkplace, Notes = @notes WHERE Id = @id";
                 using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", student.Id);
                 command.Parameters.AddWithValue("@fullName", student.FullName);
                 command.Parameters.AddWithValue("@group", student.Group);
                 command.Parameters.AddWithValue("@birthDate", student.BirthDate.ToString("yyyy-MM-dd"));
-                command.Parameters.AddWithValue("@parentPhone", student.ParentPhone);
+                command.Parameters.AddWithValue("@phone", student.Phone);
+                command.Parameters.AddWithValue("@email", student.Email);
+                command.Parameters.AddWithValue("@passport", student.Passport);
                 command.Parameters.AddWithValue("@address", student.Address);
+                command.Parameters.AddWithValue("@parentName", student.ParentName);
+                command.Parameters.AddWithValue("@parentPhone", student.ParentPhone);
+                command.Parameters.AddWithValue("@parentWorkplace", student.ParentWorkplace);
                 command.Parameters.AddWithValue("@notes", student.Notes);
 
                 command.ExecuteNonQuery();

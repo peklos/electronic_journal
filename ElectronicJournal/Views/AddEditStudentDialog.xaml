@@ -1,10 +1,10 @@
 <Window x:Class="ElectronicJournal.Views.AddEditStudentDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Добавить/Редактировать ученика"
-        Height="600"
-        Width="500"
-        MinHeight="500"
+        Title="Добавить/Редактировать студента"
+        Height="750"
+        Width="550"
+        MinHeight="700"
         WindowStartupLocation="CenterOwner"
         ResizeMode="CanResize"
         Background="{StaticResource BackgroundColor}">
@@ -23,28 +23,35 @@
                      HorizontalScrollBarVisibility="Disabled">
         <StackPanel Margin="10">
             <TextBlock x:Name="TitleTextBlock"
-                      Text="Добавить ученика"
+                      Text="Добавить студента"
                       FontSize="20"
                       FontWeight="SemiBold"
                       Foreground="{StaticResource TextColor}"
                       HorizontalAlignment="Center"
                       Margin="0,0,0,20"/>
 
-            <TextBlock Text="ФИО"
+            <!-- Основная информация -->
+            <TextBlock Text="ОСНОВНАЯ ИНФОРМАЦИЯ"
+                      FontSize="12"
+                      FontWeight="Bold"
+                      Foreground="{StaticResource PrimaryColor}"
+                      Margin="5,0,0,10"/>
+
+            <TextBlock Text="ФИО *"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,0,0,5"/>
             <TextBox x:Name="FullNameTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
-            <TextBlock Text="Группа (например: 3ИС1-23)"
+            <TextBlock Text="Группа (например: 3ИС1-23) *"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,10,0,5"/>
             <TextBox x:Name="GroupTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
-            <TextBlock Text="Дата рождения"
+            <TextBlock Text="Дата рождения *"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,10,0,5"/>
@@ -52,30 +59,106 @@
                        FontSize="14"
                        Margin="5"/>
 
-            <TextBlock Text="Телефон родителя"
+            <!-- Контактная информация студента -->
+            <TextBlock Text="КОНТАКТНАЯ ИНФОРМАЦИЯ СТУДЕНТА"
+                      FontSize="12"
+                      FontWeight="Bold"
+                      Foreground="{StaticResource PrimaryColor}"
+                      Margin="5,15,0,10"/>
+
+            <TextBlock Text="Телефон студента"
+                      FontSize="13"
+                      Foreground="{StaticResource TextColor}"
+                      Margin="5,0,0,5"/>
+            <TextBox x:Name="PhoneTextBox"
+                    Style="{StaticResource ModernTextBox}"/>
+
+            <TextBlock Text="Электронная почта"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,10,0,5"/>
-            <TextBox x:Name="ParentPhoneTextBox"
+            <TextBox x:Name="EmailTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
-            <TextBlock Text="Адрес"
+            <!-- Документы -->
+            <TextBlock Text="ДОКУМЕНТЫ"
+                      FontSize="12"
+                      FontWeight="Bold"
+                      Foreground="{StaticResource PrimaryColor}"
+                      Margin="5,15,0,10"/>
+
+            <TextBlock Text="Паспортные данные (серия и номер)"
+                      FontSize="13"
+                      Foreground="{StaticResource TextColor}"
+                      Margin="5,0,0,5"/>
+            <TextBox x:Name="PassportTextBox"
+                    Style="{StaticResource ModernTextBox}"/>
+
+            <TextBlock Text="Адрес проживания"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,10,0,5"/>
             <TextBox x:Name="AddressTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
-            <TextBlock Text="Примечания"
+            <!-- Информация о родителях -->
+            <TextBlock Text="ИНФОРМАЦИЯ О РОДИТЕЛЯХ"
+                      FontSize="12"
+                      FontWeight="Bold"
+                      Foreground="{StaticResource PrimaryColor}"
+                      Margin="5,15,0,10"/>
+
+            <TextBlock Text="ФИО родителей (мать, отец)"
+                      FontSize="13"
+                      Foreground="{StaticResource TextColor}"
+                      Margin="5,0,0,5"/>
+            <TextBox x:Name="ParentNameTextBox"
+                    Style="{StaticResource ModernTextBox}"
+                    Height="50"
+                    TextWrapping="Wrap"
+                    AcceptsReturn="True"
+                    VerticalScrollBarVisibility="Auto"/>
+
+            <TextBlock Text="Телефон родителей"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,10,0,5"/>
+            <TextBox x:Name="ParentPhoneTextBox"
+                    Style="{StaticResource ModernTextBox}"/>
+
+            <TextBlock Text="Место работы родителей"
+                      FontSize="13"
+                      Foreground="{StaticResource TextColor}"
+                      Margin="5,10,0,5"/>
+            <TextBox x:Name="ParentWorkplaceTextBox"
+                    Style="{StaticResource ModernTextBox}"
+                    Height="50"
+                    TextWrapping="Wrap"
+                    AcceptsReturn="True"
+                    VerticalScrollBarVisibility="Auto"/>
+
+            <!-- Дополнительно -->
+            <TextBlock Text="ДОПОЛНИТЕЛЬНО"
+                      FontSize="12"
+                      FontWeight="Bold"
+                      Foreground="{StaticResource PrimaryColor}"
+                      Margin="5,15,0,10"/>
+
+            <TextBlock Text="Примечания"
+                      FontSize="13"
+                      Foreground="{StaticResource TextColor}"
+                      Margin="5,0,0,5"/>
             <TextBox x:Name="NotesTextBox"
                     Style="{StaticResource ModernTextBox}"
                     Height="60"
                     TextWrapping="Wrap"
                     AcceptsReturn="True"
                     VerticalScrollBarVisibility="Auto"/>
+
+            <TextBlock Text="* - обязательные поля"
+                      FontSize="11"
+                      Foreground="{StaticResource LightTextColor}"
+                      Margin="5,10,0,0"/>
 
             <StackPanel Orientation="Horizontal"
                        HorizontalAlignment="Center"

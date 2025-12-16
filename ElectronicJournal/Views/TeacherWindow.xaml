@@ -47,8 +47,8 @@
                    Margin="20"
                    Background="{StaticResource SurfaceColor}"
                    BorderThickness="0">
-            <!-- Вкладка: Ученики -->
-            <TabItem Header="Ученики" FontSize="14" Padding="15,10">
+            <!-- Вкладка: Студенты -->
+            <TabItem Header="Студенты" FontSize="14" Padding="15,10">
                 <Grid Margin="20">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -58,7 +58,7 @@
 
                     <!-- Управление студентами -->
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="Добавить ученика"
+                        <Button Content="Добавить студента"
                                 Style="{StaticResource ModernButton}"
                                 Click="AddStudentButton_Click"/>
                         <Button Content="Редактировать"
@@ -75,17 +75,22 @@
                                 Click="RefreshStudentsButton_Click"/>
                     </StackPanel>
 
-                    <!-- Таблица учеников -->
+                    <!-- Таблица студентов -->
                     <DataGrid x:Name="StudentsDataGrid"
                              Grid.Row="1"
                              Style="{StaticResource ModernDataGrid}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                             <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"/>
-                            <DataGridTextColumn Header="Группа" Binding="{Binding Group}" Width="120"/>
-                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate, StringFormat=dd.MM.yyyy}" Width="150"/>
-                            <DataGridTextColumn Header="Телефон родителя" Binding="{Binding ParentPhone}" Width="150"/>
+                            <DataGridTextColumn Header="Группа" Binding="{Binding Group}" Width="100"/>
+                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate, StringFormat=dd.MM.yyyy}" Width="110"/>
+                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="130"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+                            <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" Width="110"/>
                             <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="*"/>
+                            <DataGridTextColumn Header="Родители" Binding="{Binding ParentName}" Width="200"/>
+                            <DataGridTextColumn Header="Тел. родителей" Binding="{Binding ParentPhone}" Width="130"/>
+                            <DataGridTextColumn Header="Работа родителей" Binding="{Binding ParentWorkplace}" Width="200"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -124,7 +129,7 @@
 
                     <!-- Фильтр -->
                     <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
-                        <TextBlock Text="Фильтр по ученику:"
+                        <TextBlock Text="Фильтр по студенту:"
                                   VerticalAlignment="Center"
                                   Margin="0,0,10,0"
                                   FontSize="13"
@@ -147,7 +152,7 @@
                              Style="{StaticResource ModernDataGrid}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                            <DataGridTextColumn Header="Ученик" Binding="{Binding StudentName}" Width="*"/>
+                            <DataGridTextColumn Header="Студент" Binding="{Binding StudentName}" Width="*"/>
                             <DataGridTextColumn Header="Предмет" Binding="{Binding SubjectName}" Width="*"/>
                             <DataGridTextColumn Header="Оценка" Binding="{Binding GradeValue}" Width="100">
                                 <DataGridTextColumn.ElementStyle>
@@ -204,7 +209,7 @@
 
                     <!-- Фильтр -->
                     <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
-                        <TextBlock Text="Фильтр по ученику:"
+                        <TextBlock Text="Фильтр по студенту:"
                                   VerticalAlignment="Center"
                                   Margin="0,0,10,0"
                                   FontSize="13"
@@ -227,7 +232,7 @@
                              Style="{StaticResource ModernDataGrid}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                            <DataGridTextColumn Header="Ученик" Binding="{Binding StudentName}" Width="*"/>
+                            <DataGridTextColumn Header="Студент" Binding="{Binding StudentName}" Width="*"/>
                             <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="120"/>
                             <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="200">
                                 <DataGridTextColumn.ElementStyle>
