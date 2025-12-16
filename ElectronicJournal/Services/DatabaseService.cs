@@ -345,6 +345,31 @@ namespace ElectronicJournal.Services
                 using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
+                // Сначала удаляем связанные оценки
+                string deleteGrades = "DELETE FROM Grades WHERE StudentId = @id";
+                using (var cmd = new SqliteCommand(deleteGrades, connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Затем удаляем связанную посещаемость
+                string deleteAttendance = "DELETE FROM Attendance WHERE StudentId = @id";
+                using (var cmd = new SqliteCommand(deleteAttendance, connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Удаляем связанного пользователя (если есть)
+                string deleteUser = "DELETE FROM Users WHERE StudentId = @id";
+                using (var cmd = new SqliteCommand(deleteUser, connection))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // Наконец удаляем самого студента
                 string query = "DELETE FROM Students WHERE Id = @id";
                 using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", id);
