@@ -20,12 +20,17 @@ namespace ElectronicJournal.Views
 
             if (_isEditMode && _studentToEdit != null)
             {
-                TitleTextBlock.Text = "Редактировать ученика";
+                TitleTextBlock.Text = "Редактировать студента";
                 FullNameTextBox.Text = _studentToEdit.FullName;
                 GroupTextBox.Text = _studentToEdit.Group;
                 BirthDatePicker.SelectedDate = _studentToEdit.BirthDate;
-                ParentPhoneTextBox.Text = _studentToEdit.ParentPhone;
+                PhoneTextBox.Text = _studentToEdit.Phone;
+                EmailTextBox.Text = _studentToEdit.Email;
+                PassportTextBox.Text = _studentToEdit.Passport;
                 AddressTextBox.Text = _studentToEdit.Address;
+                ParentNameTextBox.Text = _studentToEdit.ParentName;
+                ParentPhoneTextBox.Text = _studentToEdit.ParentPhone;
+                ParentWorkplaceTextBox.Text = _studentToEdit.ParentWorkplace;
                 NotesTextBox.Text = _studentToEdit.Notes;
             }
             else
@@ -52,8 +57,13 @@ namespace ElectronicJournal.Views
                 FullName = FullNameTextBox.Text.Trim(),
                 Group = GroupTextBox.Text.Trim(),
                 BirthDate = BirthDatePicker.SelectedDate.Value,
-                ParentPhone = ParentPhoneTextBox.Text.Trim(),
+                Phone = PhoneTextBox.Text.Trim(),
+                Email = EmailTextBox.Text.Trim(),
+                Passport = PassportTextBox.Text.Trim(),
                 Address = AddressTextBox.Text.Trim(),
+                ParentName = ParentNameTextBox.Text.Trim(),
+                ParentPhone = ParentPhoneTextBox.Text.Trim(),
+                ParentWorkplace = ParentWorkplaceTextBox.Text.Trim(),
                 Notes = NotesTextBox.Text.Trim()
             };
 
@@ -70,7 +80,7 @@ namespace ElectronicJournal.Views
 
             if (success)
             {
-                MessageBox.Show(_isEditMode ? "Ученик успешно обновлен" : "Ученик успешно добавлен",
+                MessageBox.Show(_isEditMode ? "Студент успешно обновлен" : "Студент успешно добавлен",
                               "Успех",
                               MessageBoxButton.OK,
                               MessageBoxImage.Information);

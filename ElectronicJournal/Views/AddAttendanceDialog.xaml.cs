@@ -50,7 +50,7 @@ namespace ElectronicJournal.Views
             if (StudentComboBox.SelectedItem == null ||
                 DatePicker.SelectedDate == null)
             {
-                MessageBox.Show("Пожалуйста, выберите ученика и дату",
+                MessageBox.Show("Пожалуйста, выберите студента и дату",
                               "Предупреждение",
                               MessageBoxButton.OK,
                               MessageBoxImage.Warning);

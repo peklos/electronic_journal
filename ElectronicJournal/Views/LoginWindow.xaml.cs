@@ -36,7 +36,7 @@ namespace ElectronicJournal.Views
                     teacherWindow.Show();
                     this.Close();
                 }
-                else if (user.Role == "Ученик")
+                else if (user.Role == "Студент")
                 {
                     var studentWindow = new StudentWindow(user);
                     studentWindow.Show();

@@ -26,7 +26,7 @@ namespace ElectronicJournal.Views
         {
             if (StudentSelectionPanel == null) return; // Еще не загружено
 
-            if (RoleComboBox.SelectedIndex == 1) // Ученик
+            if (RoleComboBox.SelectedIndex == 1) // Студент
             {
                 StudentSelectionPanel.Visibility = Visibility.Visible;
             }
@@ -76,11 +76,11 @@ namespace ElectronicJournal.Views
             }
 
             int? studentId = null;
-            if (role == "Ученик")
+            if (role == "Студент")
             {
                 if (StudentComboBox.SelectedItem == null)
                 {
-                    ErrorTextBlock.Text = "Пожалуйста, выберите себя из списка учеников";
+                    ErrorTextBlock.Text = "Пожалуйста, выберите себя из списка студентов";
                     return;
                 }
                 studentId = ((Models.Student)StudentComboBox.SelectedItem).Id;

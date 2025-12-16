@@ -84,13 +84,13 @@
                              Style="{StaticResource ModernComboBox}"
                              SelectionChanged="RoleComboBox_SelectionChanged">
                         <ComboBoxItem Content="Учитель" IsSelected="True"/>
-                        <ComboBoxItem Content="Ученик"/>
+                        <ComboBoxItem Content="Студент"/>
                     </ComboBox>
 
-                    <!-- Выбор студента для учеников -->
+                    <!-- Выбор студента для студентов -->
                     <StackPanel x:Name="StudentSelectionPanel"
                                Visibility="Collapsed">
-                        <TextBlock Text="Выберите себя из списка учеников"
+                        <TextBlock Text="Выберите себя из списка студентов"
                                   FontSize="13"
                                   Foreground="{StaticResource TextColor}"
                                   Margin="5,10,0,5"/>

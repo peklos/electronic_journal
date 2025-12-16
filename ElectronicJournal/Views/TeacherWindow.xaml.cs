@@ -35,7 +35,7 @@ namespace ElectronicJournal.Views
             StudentsDataGrid.ItemsSource = students;
             GradeFilterComboBox.ItemsSource = students;
             AttendanceFilterComboBox.ItemsSource = students;
-            StudentsCountTextBlock.Text = $"Всего учеников: {students.Count}";
+            StudentsCountTextBlock.Text = $"Всего студентов: {students.Count}";
         }
 
         private void LoadGrades()
@@ -72,7 +72,7 @@ namespace ElectronicJournal.Views
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите ученика для редактирования",
+                MessageBox.Show("Пожалуйста, выберите студента для редактирования",
                               "Предупреждение",
                               MessageBoxButton.OK,
                               MessageBoxImage.Warning);
@@ -83,7 +83,7 @@ namespace ElectronicJournal.Views
         {
             if (StudentsDataGrid.SelectedItem is Student selectedStudent)
             {
-                var result = MessageBox.Show($"Вы уверены, что хотите удалить ученика {selectedStudent.FullName}?",
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить студента {selectedStudent.FullName}?",
                                             "Подтверждение",
                                             MessageBoxButton.YesNo,
                                             MessageBoxImage.Question);
@@ -92,7 +92,7 @@ namespace ElectronicJournal.Views
                 {
                     if (_databaseService.DeleteStudent(selectedStudent.Id))
                     {
-                        MessageBox.Show("Ученик успешно удален",
+                        MessageBox.Show("Студент успешно удален",
                                       "Успех",
                                       MessageBoxButton.OK,
                                       MessageBoxImage.Information);
@@ -100,7 +100,7 @@ namespace ElectronicJournal.Views
                     }
                     else
                     {
-                        MessageBox.Show("Ошибка при удалении ученика",
+                        MessageBox.Show("Ошибка при удалении студента",
                                       "Ошибка",
                                       MessageBoxButton.OK,
                                       MessageBoxImage.Error);
@@ -109,7 +109,7 @@ namespace ElectronicJournal.Views
             }
             else
             {
-                MessageBox.Show("Пожалуйста, выберите ученика для удаления",
+                MessageBox.Show("Пожалуйста, выберите студента для удаления",
                               "Предупреждение",
                               MessageBoxButton.OK,
                               MessageBoxImage.Warning);

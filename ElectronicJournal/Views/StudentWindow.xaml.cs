@@ -34,8 +34,13 @@ namespace ElectronicJournal.Views
                     FullNameTextBlock.Text = _studentInfo.FullName;
                     GroupTextBlock.Text = _studentInfo.Group;
                     BirthDateTextBlock.Text = _studentInfo.BirthDate.ToString("dd.MM.yyyy");
-                    ParentPhoneTextBlock.Text = _studentInfo.ParentPhone;
-                    AddressTextBlock.Text = _studentInfo.Address;
+                    PhoneTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Phone) ? "Не указан" : _studentInfo.Phone;
+                    EmailTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Email) ? "Не указана" : _studentInfo.Email;
+                    PassportTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Passport) ? "Не указан" : _studentInfo.Passport;
+                    AddressTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Address) ? "Не указан" : _studentInfo.Address;
+                    ParentNameTextBlock.Text = string.IsNullOrEmpty(_studentInfo.ParentName) ? "Не указаны" : _studentInfo.ParentName;
+                    ParentPhoneTextBlock.Text = string.IsNullOrEmpty(_studentInfo.ParentPhone) ? "Не указан" : _studentInfo.ParentPhone;
+                    ParentWorkplaceTextBlock.Text = string.IsNullOrEmpty(_studentInfo.ParentWorkplace) ? "Не указано" : _studentInfo.ParentWorkplace;
                     NotesTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Notes) ? "Нет примечаний" : _studentInfo.Notes;
                 }
             }
