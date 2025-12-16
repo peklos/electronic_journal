@@ -2,15 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Добавить/Редактировать ученика"
-        Height="550"
+        Height="600"
         Width="500"
+        MinHeight="500"
         WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         Background="{StaticResource BackgroundColor}">
     <Border Background="{StaticResource SurfaceColor}"
             Margin="20"
             CornerRadius="10"
-            Padding="30">
+            Padding="20">
         <Border.Effect>
             <DropShadowEffect BlurRadius="20"
                             Color="#000000"
@@ -18,7 +19,9 @@
                             ShadowDepth="0"/>
         </Border.Effect>
 
-        <StackPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="10">
             <TextBlock x:Name="TitleTextBlock"
                       Text="Добавить ученика"
                       FontSize="20"
@@ -34,11 +37,11 @@
             <TextBox x:Name="FullNameTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
-            <TextBlock Text="Класс (например: 9-А)"
+            <TextBlock Text="Группа (например: 3ИС1-23)"
                       FontSize="13"
                       Foreground="{StaticResource TextColor}"
                       Margin="5,10,0,5"/>
-            <TextBox x:Name="ClassTextBox"
+            <TextBox x:Name="GroupTextBox"
                     Style="{StaticResource ModernTextBox}"/>
 
             <TextBlock Text="Дата рождения"
@@ -87,5 +90,6 @@
                         Click="CancelButton_Click"/>
             </StackPanel>
         </StackPanel>
+        </ScrollViewer>
     </Border>
 </Window>

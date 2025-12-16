@@ -32,7 +32,7 @@ namespace ElectronicJournal.Views
                 {
                     WelcomeTextBlock.Text = $"Добро пожаловать, {_studentInfo.FullName}!";
                     FullNameTextBlock.Text = _studentInfo.FullName;
-                    ClassTextBlock.Text = _studentInfo.Class;
+                    GroupTextBlock.Text = _studentInfo.Group;
                     BirthDateTextBlock.Text = _studentInfo.BirthDate.ToString("dd.MM.yyyy");
                     ParentPhoneTextBlock.Text = _studentInfo.ParentPhone;
                     AddressTextBlock.Text = _studentInfo.Address;

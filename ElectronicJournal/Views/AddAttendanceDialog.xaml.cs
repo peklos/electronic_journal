@@ -17,6 +17,10 @@ namespace ElectronicJournal.Views
 
             LoadData();
             DatePicker.SelectedDate = DateTime.Now;
+
+            // Инициализируем дефолтное состояние для поля причины
+            ReasonTextBox.IsEnabled = false;
+            ReasonTextBox.Text = string.Empty;
         }
 
         private void LoadData()
@@ -26,6 +30,9 @@ namespace ElectronicJournal.Views
 
         private void StatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Проверяем, что элементы инициализированы
+            if (ReasonTextBox == null) return;
+
             // Если выбран статус "Присутствовал", очищаем и блокируем поле причины
             if (StatusComboBox.SelectedIndex == 0)
             {

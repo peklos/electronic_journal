@@ -75,50 +75,60 @@
                                       Text="ФИО:"
                                       FontSize="14"
                                       FontWeight="SemiBold"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
                             <TextBlock Grid.Row="0" Grid.Column="1"
                                       x:Name="FullNameTextBlock"
                                       FontSize="14"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
 
                             <TextBlock Grid.Row="1" Grid.Column="0"
-                                      Text="Класс:"
+                                      Text="Группа:"
                                       FontSize="14"
                                       FontWeight="SemiBold"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
                             <TextBlock Grid.Row="1" Grid.Column="1"
-                                      x:Name="ClassTextBlock"
+                                      x:Name="GroupTextBlock"
                                       FontSize="14"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
 
                             <TextBlock Grid.Row="2" Grid.Column="0"
                                       Text="Дата рождения:"
                                       FontSize="14"
                                       FontWeight="SemiBold"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
                             <TextBlock Grid.Row="2" Grid.Column="1"
                                       x:Name="BirthDateTextBlock"
                                       FontSize="14"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
 
                             <TextBlock Grid.Row="3" Grid.Column="0"
                                       Text="Телефон родителя:"
                                       FontSize="14"
                                       FontWeight="SemiBold"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
                             <TextBlock Grid.Row="3" Grid.Column="1"
                                       x:Name="ParentPhoneTextBlock"
                                       FontSize="14"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
 
                             <TextBlock Grid.Row="4" Grid.Column="0"
                                       Text="Адрес:"
                                       FontSize="14"
                                       FontWeight="SemiBold"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"/>
                             <TextBlock Grid.Row="4" Grid.Column="1"
                                       x:Name="AddressTextBlock"
                                       FontSize="14"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"
                                       TextWrapping="Wrap"/>
 
@@ -126,17 +136,19 @@
                                       Text="Примечания:"
                                       FontSize="14"
                                       FontWeight="SemiBold"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"
                                       VerticalAlignment="Top"/>
                             <TextBlock Grid.Row="5" Grid.Column="1"
                                       x:Name="NotesTextBlock"
                                       FontSize="14"
+                                      Foreground="{StaticResource TextColor}"
                                       Margin="0,10,0,10"
                                       TextWrapping="Wrap"/>
                         </Grid>
 
                         <!-- Статистика -->
-                        <Border Background="#E8F5E9"
+                        <Border Background="#1B3A1B"
                                 BorderBrush="{StaticResource SuccessColor}"
                                 BorderThickness="2"
                                 CornerRadius="10"
@@ -162,7 +174,7 @@
                                         <TextBlock x:Name="AverageGradeTextBlock"
                                                   FontSize="32"
                                                   FontWeight="Bold"
-                                                  Foreground="{StaticResource SuccessColor}"/>
+                                                  Foreground="#66BB6A"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Column="1">
@@ -172,7 +184,7 @@
                                         <TextBlock x:Name="TotalGradesTextBlock"
                                                   FontSize="32"
                                                   FontWeight="Bold"
-                                                  Foreground="{StaticResource SecondaryColor}"/>
+                                                  Foreground="#64B5F6"/>
                                     </StackPanel>
                                 </Grid>
                             </StackPanel>
