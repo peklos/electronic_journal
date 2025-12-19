@@ -76,6 +76,10 @@ namespace ElectronicJournal.Views
             }
 
             int? studentId = null;
+            if (role == "Студент" || role == "Преподаватель")
+            {
+                role = role == "Преподаватель" ? "Учитель" : role;
+            }
             if (role == "Студент")
             {
                 if (StudentComboBox.SelectedItem == null)

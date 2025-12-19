@@ -31,16 +31,25 @@ namespace ElectronicJournal.Views
                 if (_studentInfo != null)
                 {
                     WelcomeTextBlock.Text = $"Добро пожаловать, {_studentInfo.FullName}!";
+
+                    // Личные данные
                     FullNameTextBlock.Text = _studentInfo.FullName;
                     GroupTextBlock.Text = _studentInfo.Group;
                     BirthDateTextBlock.Text = _studentInfo.BirthDate.ToString("dd.MM.yyyy");
                     PhoneTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Phone) ? "Не указан" : _studentInfo.Phone;
-                    EmailTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Email) ? "Не указана" : _studentInfo.Email;
-                    PassportTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Passport) ? "Не указан" : _studentInfo.Passport;
                     AddressTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Address) ? "Не указан" : _studentInfo.Address;
-                    ParentNameTextBlock.Text = string.IsNullOrEmpty(_studentInfo.ParentName) ? "Не указаны" : _studentInfo.ParentName;
-                    ParentPhoneTextBlock.Text = string.IsNullOrEmpty(_studentInfo.ParentPhone) ? "Не указан" : _studentInfo.ParentPhone;
-                    ParentWorkplaceTextBlock.Text = string.IsNullOrEmpty(_studentInfo.ParentWorkplace) ? "Не указано" : _studentInfo.ParentWorkplace;
+
+                    // Данные матери
+                    MotherNameTextBlock.Text = string.IsNullOrEmpty(_studentInfo.MotherFullName) ? "Не указано" : _studentInfo.MotherFullName;
+                    MotherPhoneTextBlock.Text = string.IsNullOrEmpty(_studentInfo.MotherPhone) ? "Не указан" : _studentInfo.MotherPhone;
+                    MotherWorkplaceTextBlock.Text = string.IsNullOrEmpty(_studentInfo.MotherWorkplace) ? "Не указано" : _studentInfo.MotherWorkplace;
+
+                    // Данные отца
+                    FatherNameTextBlock.Text = string.IsNullOrEmpty(_studentInfo.FatherFullName) ? "Не указано" : _studentInfo.FatherFullName;
+                    FatherPhoneTextBlock.Text = string.IsNullOrEmpty(_studentInfo.FatherPhone) ? "Не указан" : _studentInfo.FatherPhone;
+                    FatherWorkplaceTextBlock.Text = string.IsNullOrEmpty(_studentInfo.FatherWorkplace) ? "Не указано" : _studentInfo.FatherWorkplace;
+
+                    // Примечания
                     NotesTextBlock.Text = string.IsNullOrEmpty(_studentInfo.Notes) ? "Нет примечаний" : _studentInfo.Notes;
                 }
             }

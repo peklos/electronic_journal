@@ -1,9 +1,9 @@
 <Window x:Class="ElectronicJournal.Views.TeacherWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Электронный журнал - Панель учителя"
-        Height="700"
-        Width="1200"
+        Title="АИС Колледж - Панель преподавателя"
+        Height="750"
+        Width="1400"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"
         Background="{StaticResource BackgroundColor}">
@@ -16,247 +16,309 @@
         <!-- Шапка -->
         <Border Grid.Row="0"
                 Background="{StaticResource PrimaryColor}"
-                Padding="20">
+                Padding="25,18">
             <Grid>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text=""
-                              FontSize="28"
-                              VerticalAlignment="Center"
-                              Margin="0,0,10,0"/>
-                    <StackPanel>
-                        <TextBlock x:Name="WelcomeTextBlock"
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Логотип и название -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Border Background="#FFFFFF"
+                            Width="45"
+                            Height="45"
+                            CornerRadius="8"
+                            VerticalAlignment="Center"
+                            Margin="0,0,15,0">
+                        <TextBlock Text="АИС"
+                                  FontSize="14"
+                                  FontWeight="Bold"
+                                  Foreground="{StaticResource PrimaryColor}"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="АИС Колледж"
                                   FontSize="20"
                                   FontWeight="Bold"
-                                  Foreground="{StaticResource TextColor}"/>
-                        <TextBlock Text="Панель управления куратора группы"
+                                  Foreground="#FFFFFF"/>
+                        <TextBlock Text="Панель преподавателя"
                                   FontSize="12"
-                                  Foreground="#BDC3C7"/>
+                                  Foreground="#B0BEC5"/>
                     </StackPanel>
                 </StackPanel>
 
-                <Button Content="Выход"
-                        Style="{StaticResource ModernButton}"
-                        Background="{StaticResource AccentColor}"
-                        HorizontalAlignment="Right"
+                <!-- Информация о пользователе -->
+                <StackPanel Grid.Column="1"
+                           Orientation="Horizontal"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <TextBlock x:Name="WelcomeTextBlock"
+                              FontSize="15"
+                              Foreground="#FFFFFF"
+                              VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Кнопка выхода -->
+                <Button Grid.Column="2"
+                        Content="Выйти из системы"
+                        Style="{StaticResource DangerButton}"
+                        Padding="20,10"
                         Click="LogoutButton_Click"/>
             </Grid>
         </Border>
 
-        <!-- Главный контент с вкладками -->
-        <TabControl Grid.Row="1"
-                   Margin="20"
-                   Background="{StaticResource SurfaceColor}"
-                   BorderThickness="0">
-            <!-- Вкладка: Студенты -->
-            <TabItem Header="Студенты" FontSize="14" Padding="15,10">
-                <Grid Margin="20">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+        <!-- Основной контент с вкладками -->
+        <Border Grid.Row="1" Margin="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="15" Color="#000000" Opacity="0.08" ShadowDepth="3"/>
+            </Border.Effect>
+            <TabControl Background="{StaticResource SurfaceColor}">
 
-                    <!-- Управление студентами -->
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="Добавить студента"
-                                Style="{StaticResource ModernButton}"
-                                Click="AddStudentButton_Click"/>
-                        <Button Content="Редактировать"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource SuccessColor}"
-                                Click="EditStudentButton_Click"/>
-                        <Button Content="Удалить"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource AccentColor}"
-                                Click="DeleteStudentButton_Click"/>
-                        <Button Content="Обновить"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource LightTextColor}"
-                                Click="RefreshStudentsButton_Click"/>
-                    </StackPanel>
+                <!-- Вкладка: Студенты -->
+                <TabItem Header="Студенты" FontSize="15" Padding="25,12">
+                    <Grid Margin="25">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- Таблица студентов -->
-                    <DataGrid x:Name="StudentsDataGrid"
-                             Grid.Row="1"
-                             Style="{StaticResource ModernDataGrid}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}" Width="*"/>
-                            <DataGridTextColumn Header="Группа" Binding="{Binding Group}" Width="100"/>
-                            <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate, StringFormat=dd.MM.yyyy}" Width="110"/>
-                            <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="130"/>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
-                            <DataGridTextColumn Header="Паспорт" Binding="{Binding Passport}" Width="110"/>
-                            <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="*"/>
-                            <DataGridTextColumn Header="Родители" Binding="{Binding ParentName}" Width="200"/>
-                            <DataGridTextColumn Header="Тел. родителей" Binding="{Binding ParentPhone}" Width="130"/>
-                            <DataGridTextColumn Header="Работа родителей" Binding="{Binding ParentWorkplace}" Width="200"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                        <!-- Панель управления -->
+                        <Border Grid.Row="0"
+                                Background="#FAFAFA"
+                                CornerRadius="8"
+                                Padding="15"
+                                Margin="0,0,0,20">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Добавить студента"
+                                        Style="{StaticResource PrimaryButton}"
+                                        Click="AddStudentButton_Click"/>
+                                <Button Content="Редактировать"
+                                        Style="{StaticResource SuccessButton}"
+                                        Click="EditStudentButton_Click"/>
+                                <Button Content="Удалить"
+                                        Style="{StaticResource DangerButton}"
+                                        Click="DeleteStudentButton_Click"/>
+                                <Button Content="Обновить список"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Click="RefreshStudentsButton_Click"/>
+                            </StackPanel>
+                        </Border>
 
-                    <!-- Информация -->
-                    <TextBlock Grid.Row="2"
-                              x:Name="StudentsCountTextBlock"
-                              FontSize="12"
-                              Foreground="{StaticResource LightTextColor}"
-                              Margin="0,10,0,0"/>
-                </Grid>
-            </TabItem>
+                        <!-- Таблица студентов -->
+                        <DataGrid x:Name="StudentsDataGrid"
+                                 Grid.Row="1"
+                                 Style="{StaticResource ModernDataGrid}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="130"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding FirstName}" Width="110"/>
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding MiddleName}" Width="130"/>
+                                <DataGridTextColumn Header="Группа" Binding="{Binding Group}" Width="90"/>
+                                <DataGridTextColumn Header="Дата рождения" Binding="{Binding BirthDate, StringFormat=dd.MM.yyyy}" Width="110"/>
+                                <DataGridTextColumn Header="Телефон" Binding="{Binding Phone}" Width="130"/>
+                                <DataGridTextColumn Header="Адрес" Binding="{Binding Address}" Width="200"/>
+                                <DataGridTextColumn Header="Мать (ФИО)" Binding="{Binding MotherFullName}" Width="180"/>
+                                <DataGridTextColumn Header="Тел. матери" Binding="{Binding MotherPhone}" Width="130"/>
+                                <DataGridTextColumn Header="Работа матери" Binding="{Binding MotherWorkplace}" Width="180"/>
+                                <DataGridTextColumn Header="Отец (ФИО)" Binding="{Binding FatherFullName}" Width="180"/>
+                                <DataGridTextColumn Header="Тел. отца" Binding="{Binding FatherPhone}" Width="130"/>
+                                <DataGridTextColumn Header="Работа отца" Binding="{Binding FatherWorkplace}" Width="180"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-            <!-- Вкладка: Оценки -->
-            <TabItem Header="Оценки" FontSize="14" Padding="15,10">
-                <Grid Margin="20">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                        <!-- Статус -->
+                        <Border Grid.Row="2"
+                                Background="#FAFAFA"
+                                CornerRadius="8"
+                                Padding="15"
+                                Margin="0,15,0,0">
+                            <TextBlock x:Name="StudentsCountTextBlock"
+                                      FontSize="13"
+                                      Foreground="{StaticResource LightTextColor}"/>
+                        </Border>
+                    </Grid>
+                </TabItem>
 
-                    <!-- Управление оценками -->
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="Добавить оценку"
-                                Style="{StaticResource ModernButton}"
-                                Click="AddGradeButton_Click"/>
-                        <Button Content="Удалить оценку"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource AccentColor}"
-                                Click="DeleteGradeButton_Click"/>
-                        <Button Content="Обновить"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource LightTextColor}"
-                                Click="RefreshGradesButton_Click"/>
-                    </StackPanel>
+                <!-- Вкладка: Оценки -->
+                <TabItem Header="Оценки" FontSize="15" Padding="25,12">
+                    <Grid Margin="25">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- Фильтр -->
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
-                        <TextBlock Text="Фильтр по студенту:"
-                                  VerticalAlignment="Center"
-                                  Margin="0,0,10,0"
-                                  FontSize="13"
-                                  Foreground="{StaticResource TextColor}"/>
-                        <ComboBox x:Name="GradeFilterComboBox"
-                                 Width="250"
-                                 Style="{StaticResource ModernComboBox}"
-                                 SelectionChanged="GradeFilterComboBox_SelectionChanged"
-                                 DisplayMemberPath="FullName"/>
-                        <Button Content="Сбросить фильтр"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource LightTextColor}"
-                                Padding="10,5"
-                                Click="ClearGradeFilterButton_Click"/>
-                    </StackPanel>
+                        <!-- Панель управления -->
+                        <Border Grid.Row="0"
+                                Background="#FAFAFA"
+                                CornerRadius="8"
+                                Padding="15"
+                                Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Добавить оценку"
+                                        Style="{StaticResource PrimaryButton}"
+                                        Click="AddGradeButton_Click"/>
+                                <Button Content="Удалить оценку"
+                                        Style="{StaticResource DangerButton}"
+                                        Click="DeleteGradeButton_Click"/>
+                                <Button Content="Обновить список"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Click="RefreshGradesButton_Click"/>
+                            </StackPanel>
+                        </Border>
 
-                    <!-- Таблица оценок -->
-                    <DataGrid x:Name="GradesDataGrid"
-                             Grid.Row="2"
-                             Style="{StaticResource ModernDataGrid}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                            <DataGridTextColumn Header="Студент" Binding="{Binding StudentName}" Width="*"/>
-                            <DataGridTextColumn Header="Предмет" Binding="{Binding SubjectName}" Width="*"/>
-                            <DataGridTextColumn Header="Оценка" Binding="{Binding GradeValue}" Width="100">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="FontWeight" Value="Bold"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding GradeValue}" Value="5">
-                                                <Setter Property="Foreground" Value="#27AE60"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding GradeValue}" Value="4">
-                                                <Setter Property="Foreground" Value="#3498DB"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding GradeValue}" Value="3">
-                                                <Setter Property="Foreground" Value="#F39C12"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding GradeValue}" Value="2">
-                                                <Setter Property="Foreground" Value="#E74C3C"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="120"/>
-                            <DataGridTextColumn Header="Тема" Binding="{Binding Topic}" Width="*"/>
-                            <DataGridTextColumn Header="Примечание" Binding="{Binding Notes}" Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
+                        <!-- Фильтр -->
+                        <Border Grid.Row="1"
+                                Background="#E3F2FD"
+                                CornerRadius="8"
+                                Padding="15"
+                                Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Фильтр по студенту:"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,15,0"
+                                          FontSize="14"
+                                          FontWeight="Medium"
+                                          Foreground="{StaticResource TextSecondaryColor}"/>
+                                <ComboBox x:Name="GradeFilterComboBox"
+                                         Width="300"
+                                         Style="{StaticResource ModernComboBox}"
+                                         SelectionChanged="GradeFilterComboBox_SelectionChanged"
+                                         DisplayMemberPath="FullName"/>
+                                <Button Content="Сбросить фильтр"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Padding="15,10"
+                                        Click="ClearGradeFilterButton_Click"/>
+                            </StackPanel>
+                        </Border>
 
-            <!-- Вкладка: Посещаемость -->
-            <TabItem Header="Посещаемость" FontSize="14" Padding="15,10">
-                <Grid Margin="20">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                        <!-- Таблица оценок -->
+                        <DataGrid x:Name="GradesDataGrid"
+                                 Grid.Row="2"
+                                 Style="{StaticResource ModernDataGrid}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                <DataGridTextColumn Header="Студент" Binding="{Binding StudentName}" Width="*"/>
+                                <DataGridTextColumn Header="Предмет" Binding="{Binding SubjectName}" Width="*"/>
+                                <DataGridTextColumn Header="Оценка" Binding="{Binding GradeValue}" Width="100">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Setter Property="FontSize" Value="15"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding GradeValue}" Value="5">
+                                                    <Setter Property="Foreground" Value="#2E7D32"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding GradeValue}" Value="4">
+                                                    <Setter Property="Foreground" Value="#1565C0"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding GradeValue}" Value="3">
+                                                    <Setter Property="Foreground" Value="#F57C00"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding GradeValue}" Value="2">
+                                                    <Setter Property="Foreground" Value="#D32F2F"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="120"/>
+                                <DataGridTextColumn Header="Тема" Binding="{Binding Topic}" Width="*"/>
+                                <DataGridTextColumn Header="Примечание" Binding="{Binding Notes}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
 
-                    <!-- Управление посещаемостью -->
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
-                        <Button Content="Отметить посещаемость"
-                                Style="{StaticResource ModernButton}"
-                                Click="AddAttendanceButton_Click"/>
-                        <Button Content="Удалить запись"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource AccentColor}"
-                                Click="DeleteAttendanceButton_Click"/>
-                        <Button Content="Обновить"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource LightTextColor}"
-                                Click="RefreshAttendanceButton_Click"/>
-                    </StackPanel>
+                <!-- Вкладка: Посещаемость -->
+                <TabItem Header="Посещаемость" FontSize="15" Padding="25,12">
+                    <Grid Margin="25">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                    <!-- Фильтр -->
-                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
-                        <TextBlock Text="Фильтр по студенту:"
-                                  VerticalAlignment="Center"
-                                  Margin="0,0,10,0"
-                                  FontSize="13"
-                                  Foreground="{StaticResource TextColor}"/>
-                        <ComboBox x:Name="AttendanceFilterComboBox"
-                                 Width="250"
-                                 Style="{StaticResource ModernComboBox}"
-                                 SelectionChanged="AttendanceFilterComboBox_SelectionChanged"
-                                 DisplayMemberPath="FullName"/>
-                        <Button Content="Сбросить фильтр"
-                                Style="{StaticResource ModernButton}"
-                                Background="{StaticResource LightTextColor}"
-                                Padding="10,5"
-                                Click="ClearAttendanceFilterButton_Click"/>
-                    </StackPanel>
+                        <!-- Панель управления -->
+                        <Border Grid.Row="0"
+                                Background="#FAFAFA"
+                                CornerRadius="8"
+                                Padding="15"
+                                Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Отметить посещаемость"
+                                        Style="{StaticResource PrimaryButton}"
+                                        Click="AddAttendanceButton_Click"/>
+                                <Button Content="Удалить запись"
+                                        Style="{StaticResource DangerButton}"
+                                        Click="DeleteAttendanceButton_Click"/>
+                                <Button Content="Обновить список"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Click="RefreshAttendanceButton_Click"/>
+                            </StackPanel>
+                        </Border>
 
-                    <!-- Таблица посещаемости -->
-                    <DataGrid x:Name="AttendanceDataGrid"
-                             Grid.Row="2"
-                             Style="{StaticResource ModernDataGrid}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
-                            <DataGridTextColumn Header="Студент" Binding="{Binding StudentName}" Width="*"/>
-                            <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="120"/>
-                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="200">
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="FontWeight" Value="SemiBold"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Status}" Value="Присутствовал">
-                                                <Setter Property="Foreground" Value="#27AE60"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Status}" Value="Отсутствовал">
-                                                <Setter Property="Foreground" Value="#E74C3C"/>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding Status}" Value="По уважительной причине">
-                                                <Setter Property="Foreground" Value="#F39C12"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Header="Причина" Binding="{Binding Reason}" Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
-            </TabItem>
-        </TabControl>
+                        <!-- Фильтр -->
+                        <Border Grid.Row="1"
+                                Background="#E3F2FD"
+                                CornerRadius="8"
+                                Padding="15"
+                                Margin="0,0,0,15">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Фильтр по студенту:"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,15,0"
+                                          FontSize="14"
+                                          FontWeight="Medium"
+                                          Foreground="{StaticResource TextSecondaryColor}"/>
+                                <ComboBox x:Name="AttendanceFilterComboBox"
+                                         Width="300"
+                                         Style="{StaticResource ModernComboBox}"
+                                         SelectionChanged="AttendanceFilterComboBox_SelectionChanged"
+                                         DisplayMemberPath="FullName"/>
+                                <Button Content="Сбросить фильтр"
+                                        Style="{StaticResource SecondaryButton}"
+                                        Padding="15,10"
+                                        Click="ClearAttendanceFilterButton_Click"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- Таблица посещаемости -->
+                        <DataGrid x:Name="AttendanceDataGrid"
+                                 Grid.Row="2"
+                                 Style="{StaticResource ModernDataGrid}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                                <DataGridTextColumn Header="Студент" Binding="{Binding StudentName}" Width="*"/>
+                                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="130"/>
+                                <DataGridTextColumn Header="Статус" Binding="{Binding Status}" Width="200">
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontWeight" Value="SemiBold"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Status}" Value="Присутствовал">
+                                                    <Setter Property="Foreground" Value="#2E7D32"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status}" Value="Отсутствовал">
+                                                    <Setter Property="Foreground" Value="#D32F2F"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding Status}" Value="По уважительной причине">
+                                                    <Setter Property="Foreground" Value="#F57C00"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Header="Причина" Binding="{Binding Reason}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Border>
     </Grid>
 </Window>

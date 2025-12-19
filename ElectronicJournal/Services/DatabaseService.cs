@@ -15,7 +15,7 @@ namespace ElectronicJournal.Services
         {
             try
             {
-                string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "electronic_journal.db");
+                string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database", "college_ais.db");
                 string dbDirectory = Path.GetDirectoryName(dbPath)!;
 
                 if (!Directory.Exists(dbDirectory))
@@ -49,16 +49,23 @@ namespace ElectronicJournal.Services
 
                 CREATE TABLE IF NOT EXISTS Students (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    FullName TEXT NOT NULL,
+                    LastName TEXT NOT NULL,
+                    FirstName TEXT NOT NULL,
+                    MiddleName TEXT,
                     [Group] TEXT NOT NULL,
                     BirthDate TEXT NOT NULL,
                     Phone TEXT,
-                    Email TEXT,
-                    Passport TEXT,
                     Address TEXT,
-                    ParentName TEXT,
-                    ParentPhone TEXT,
-                    ParentWorkplace TEXT,
+                    MotherLastName TEXT,
+                    MotherFirstName TEXT,
+                    MotherMiddleName TEXT,
+                    MotherPhone TEXT,
+                    MotherWorkplace TEXT,
+                    FatherLastName TEXT,
+                    FatherFirstName TEXT,
+                    FatherMiddleName TEXT,
+                    FatherPhone TEXT,
+                    FatherWorkplace TEXT,
                     Notes TEXT
                 );
 
@@ -93,7 +100,7 @@ namespace ElectronicJournal.Services
             using var command = new SqliteCommand(createTables, connection);
             command.ExecuteNonQuery();
 
-            // Добавим тестового учителя, если база пустая
+            // Добавим тестовые данные, если база пустая
             string checkUsers = "SELECT COUNT(*) FROM Users";
             using var checkCommand = new SqliteCommand(checkUsers, connection);
             long userCount = (long)checkCommand.ExecuteScalar()!;
@@ -102,31 +109,43 @@ namespace ElectronicJournal.Services
             {
                 string insertDefaultData = @"
                     INSERT INTO Users (Username, Password, FullName, Role)
-                    VALUES ('admin', 'admin', 'Администратор', 'Учитель');
+                    VALUES ('admin', 'admin', 'Петрова Елена Сергеевна', 'Учитель');
 
                     INSERT INTO Subjects (Name, TeacherName) VALUES
                     ('Математика', 'Иванов И.И.'),
-                    ('Русский язык', 'Петрова П.П.'),
-                    ('Физика', 'Сидоров С.С.'),
-                    ('История', 'Васильева В.В.'),
-                    ('Английский язык', 'Смирнова С.С.');
+                    ('Русский язык', 'Петрова Е.С.'),
+                    ('Информатика', 'Сидоров А.В.'),
+                    ('История', 'Васильева М.А.'),
+                    ('Английский язык', 'Смирнова О.П.');
 
-                    INSERT INTO Students (FullName, [Group], BirthDate, Phone, Email, Passport, Address, ParentName, ParentPhone, ParentWorkplace, Notes) VALUES
-                    ('Иванов Петр Сергеевич', '3ИС1-23', '2005-05-15', '+7 900 111-22-33', 'ivanov.p@mail.ru', '1234 567890', 'ул. Ленина, д. 10, кв. 5', 'Иванов Сергей Петрович, Иванова Елена Владимировна', '+7 999 123-45-67', 'ООО Техностар, инженер / Школа №5, учитель', 'Отличник'),
-                    ('Петрова Мария Ивановна', '3ИС-23', '2005-08-22', '+7 900 222-33-44', 'petrova.m@gmail.com', '1234 567891', 'ул. Пушкина, д. 25, кв. 12', 'Петров Иван Николаевич, Петрова Ольга Сергеевна', '+7 999 234-56-78', 'Банк Открытие, менеджер / Поликлиника №3, врач', 'Активная студентка'),
-                    ('Сидоров Александр Петрович', '2Ю-23', '2006-03-10', '+7 900 333-44-55', 'sidorov.a@yandex.ru', '1234 567892', 'ул. Гагарина, д. 5, кв. 8', 'Сидоров Петр Александрович, Сидорова Наталья Ивановна', '+7 999 345-67-89', 'Завод Прогресс, мастер / Магазин Пятерочка, продавец', 'Спортсмен'),
-                    ('Козлова Анна Дмитриевна', '1ИС1-24', '2007-11-30', '+7 900 444-55-66', 'kozlova.a@mail.ru', '1234 567893', 'ул. Мира, д. 15, кв. 20', 'Козлов Дмитрий Викторович, Козлова Татьяна Сергеевна', '+7 999 456-78-90', 'ИП Козлов, директор / Салон красоты, парикмахер', 'Творческая личность'),
-                    ('Смирнов Дмитрий Андреевич', '3ИС-23', '2005-07-18', '+7 900 555-66-77', 'smirnov.d@gmail.com', '1234 567894', 'ул. Советская, д. 8, кв. 3', 'Смирнов Андрей Дмитриевич, Смирнова Людмила Петровна', '+7 999 567-89-01', 'АО Энергосбыт, электрик / Детский сад №10, воспитатель', 'Хороший студент');
+                    INSERT INTO Students (LastName, FirstName, MiddleName, [Group], BirthDate, Phone, Address,
+                        MotherLastName, MotherFirstName, MotherMiddleName, MotherPhone, MotherWorkplace,
+                        FatherLastName, FatherFirstName, FatherMiddleName, FatherPhone, FatherWorkplace, Notes) VALUES
+                    ('Иванов', 'Петр', 'Сергеевич', 'ИС-301', '2005-05-15', '+7 900 111-22-33', 'г. Москва, ул. Ленина, д. 10, кв. 5',
+                        'Иванова', 'Елена', 'Владимировна', '+7 999 123-45-67', 'Школа №15, учитель начальных классов',
+                        'Иванов', 'Сергей', 'Петрович', '+7 999 765-43-21', 'ООО Техностар, инженер-программист', 'Отличник, староста группы'),
+                    ('Петрова', 'Мария', 'Ивановна', 'ИС-301', '2005-08-22', '+7 900 222-33-44', 'г. Москва, ул. Пушкина, д. 25, кв. 12',
+                        'Петрова', 'Ольга', 'Сергеевна', '+7 999 234-56-78', 'Поликлиника №3, врач-терапевт',
+                        'Петров', 'Иван', 'Николаевич', '+7 999 876-54-32', 'Банк Открытие, старший менеджер', 'Активная студентка'),
+                    ('Сидоров', 'Александр', 'Петрович', 'ПР-201', '2006-03-10', '+7 900 333-44-55', 'г. Москва, ул. Гагарина, д. 5, кв. 8',
+                        'Сидорова', 'Наталья', 'Ивановна', '+7 999 345-67-89', 'Магазин Пятерочка, продавец-кассир',
+                        'Сидоров', 'Петр', 'Александрович', '+7 999 987-65-43', 'Завод Прогресс, мастер цеха', 'Спортсмен, член сборной'),
+                    ('Козлова', 'Анна', 'Дмитриевна', 'ИС-101', '2007-11-30', '+7 900 444-55-66', 'г. Москва, ул. Мира, д. 15, кв. 20',
+                        'Козлова', 'Татьяна', 'Сергеевна', '+7 999 456-78-90', 'Салон красоты Элегант, парикмахер-стилист',
+                        'Козлов', 'Дмитрий', 'Викторович', '+7 999 098-76-54', 'ИП Козлов, директор', 'Творческая личность'),
+                    ('Смирнов', 'Дмитрий', 'Андреевич', 'ИС-301', '2005-07-18', '+7 900 555-66-77', 'г. Москва, ул. Советская, д. 8, кв. 3',
+                        'Смирнова', 'Людмила', 'Петровна', '+7 999 567-89-01', 'Детский сад №10, воспитатель',
+                        'Смирнов', 'Андрей', 'Дмитриевич', '+7 999 109-87-65', 'АО Энергосбыт, электромонтер', 'Хороший студент');
 
                     INSERT INTO Grades (StudentId, SubjectId, GradeValue, Date, Topic, Notes) VALUES
                     (1, 1, 5, '2025-12-01', 'Квадратные уравнения', 'Отлично решил все задачи'),
                     (1, 2, 5, '2025-12-02', 'Сложноподчиненные предложения', 'Прекрасный ответ'),
-                    (1, 3, 4, '2025-12-03', 'Закон Ома', 'Хорошая работа'),
+                    (1, 3, 5, '2025-12-03', 'Базы данных SQL', 'Отличная работа'),
                     (2, 1, 4, '2025-12-01', 'Квадратные уравнения', 'Хорошо'),
                     (2, 2, 5, '2025-12-02', 'Сложноподчиненные предложения', 'Отлично'),
                     (2, 4, 5, '2025-12-04', 'Великая Отечественная война', 'Отличный доклад'),
                     (3, 1, 3, '2025-12-01', 'Квадратные уравнения', 'Нужно подтянуть'),
-                    (3, 3, 4, '2025-12-03', 'Закон Ома', 'Хорошо'),
+                    (3, 3, 4, '2025-12-03', 'Базы данных SQL', 'Хорошо'),
                     (4, 1, 4, '2025-12-01', 'Квадратные уравнения', 'Хорошо'),
                     (4, 2, 5, '2025-12-02', 'Сложноподчиненные предложения', 'Отлично'),
                     (4, 5, 5, '2025-12-05', 'Present Perfect', 'Excellent work'),
@@ -141,7 +160,7 @@ namespace ElectronicJournal.Services
                     (2, '2025-12-02', 'Присутствовал', ''),
                     (2, '2025-12-03', 'По уважительной причине', 'Справка от врача'),
                     (3, '2025-12-01', 'Присутствовал', ''),
-                    (3, '2025-12-02', 'Отсутствовал', 'Без причины'),
+                    (3, '2025-12-02', 'Отсутствовал', 'Без уважительной причины'),
                     (3, '2025-12-03', 'Присутствовал', ''),
                     (4, '2025-12-01', 'Присутствовал', ''),
                     (4, '2025-12-02', 'Присутствовал', ''),
@@ -219,27 +238,13 @@ namespace ElectronicJournal.Services
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
-            string query = "SELECT * FROM Students ORDER BY [Group], FullName";
+            string query = "SELECT * FROM Students ORDER BY [Group], LastName, FirstName";
             using var command = new SqliteCommand(query, connection);
             using var reader = command.ExecuteReader();
 
             while (reader.Read())
             {
-                students.Add(new Student
-                {
-                    Id = reader.GetInt32(0),
-                    FullName = reader.GetString(1),
-                    Group = reader.GetString(2),
-                    BirthDate = DateTime.Parse(reader.GetString(3)),
-                    Phone = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
-                    Email = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                    Passport = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
-                    Address = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
-                    ParentName = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
-                    ParentPhone = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
-                    ParentWorkplace = reader.IsDBNull(10) ? string.Empty : reader.GetString(10),
-                    Notes = reader.IsDBNull(11) ? string.Empty : reader.GetString(11)
-                });
+                students.Add(ReadStudent(reader));
             }
 
             return students;
@@ -257,24 +262,36 @@ namespace ElectronicJournal.Services
 
             if (reader.Read())
             {
-                return new Student
-                {
-                    Id = reader.GetInt32(0),
-                    FullName = reader.GetString(1),
-                    Group = reader.GetString(2),
-                    BirthDate = DateTime.Parse(reader.GetString(3)),
-                    Phone = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
-                    Email = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                    Passport = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
-                    Address = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
-                    ParentName = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
-                    ParentPhone = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
-                    ParentWorkplace = reader.IsDBNull(10) ? string.Empty : reader.GetString(10),
-                    Notes = reader.IsDBNull(11) ? string.Empty : reader.GetString(11)
-                };
+                return ReadStudent(reader);
             }
 
             return null;
+        }
+
+        private Student ReadStudent(SqliteDataReader reader)
+        {
+            return new Student
+            {
+                Id = reader.GetInt32(0),
+                LastName = reader.GetString(1),
+                FirstName = reader.GetString(2),
+                MiddleName = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
+                Group = reader.GetString(4),
+                BirthDate = DateTime.Parse(reader.GetString(5)),
+                Phone = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                Address = reader.IsDBNull(7) ? string.Empty : reader.GetString(7),
+                MotherLastName = reader.IsDBNull(8) ? string.Empty : reader.GetString(8),
+                MotherFirstName = reader.IsDBNull(9) ? string.Empty : reader.GetString(9),
+                MotherMiddleName = reader.IsDBNull(10) ? string.Empty : reader.GetString(10),
+                MotherPhone = reader.IsDBNull(11) ? string.Empty : reader.GetString(11),
+                MotherWorkplace = reader.IsDBNull(12) ? string.Empty : reader.GetString(12),
+                FatherLastName = reader.IsDBNull(13) ? string.Empty : reader.GetString(13),
+                FatherFirstName = reader.IsDBNull(14) ? string.Empty : reader.GetString(14),
+                FatherMiddleName = reader.IsDBNull(15) ? string.Empty : reader.GetString(15),
+                FatherPhone = reader.IsDBNull(16) ? string.Empty : reader.GetString(16),
+                FatherWorkplace = reader.IsDBNull(17) ? string.Empty : reader.GetString(17),
+                Notes = reader.IsDBNull(18) ? string.Empty : reader.GetString(18)
+            };
         }
 
         public bool AddStudent(Student student)
@@ -284,19 +301,15 @@ namespace ElectronicJournal.Services
                 using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
-                string query = "INSERT INTO Students (FullName, [Group], BirthDate, Phone, Email, Passport, Address, ParentName, ParentPhone, ParentWorkplace, Notes) VALUES (@fullName, @group, @birthDate, @phone, @email, @passport, @address, @parentName, @parentPhone, @parentWorkplace, @notes)";
+                string query = @"INSERT INTO Students (LastName, FirstName, MiddleName, [Group], BirthDate, Phone, Address,
+                    MotherLastName, MotherFirstName, MotherMiddleName, MotherPhone, MotherWorkplace,
+                    FatherLastName, FatherFirstName, FatherMiddleName, FatherPhone, FatherWorkplace, Notes)
+                    VALUES (@lastName, @firstName, @middleName, @group, @birthDate, @phone, @address,
+                    @motherLastName, @motherFirstName, @motherMiddleName, @motherPhone, @motherWorkplace,
+                    @fatherLastName, @fatherFirstName, @fatherMiddleName, @fatherPhone, @fatherWorkplace, @notes)";
+
                 using var command = new SqliteCommand(query, connection);
-                command.Parameters.AddWithValue("@fullName", student.FullName);
-                command.Parameters.AddWithValue("@group", student.Group);
-                command.Parameters.AddWithValue("@birthDate", student.BirthDate.ToString("yyyy-MM-dd"));
-                command.Parameters.AddWithValue("@phone", student.Phone);
-                command.Parameters.AddWithValue("@email", student.Email);
-                command.Parameters.AddWithValue("@passport", student.Passport);
-                command.Parameters.AddWithValue("@address", student.Address);
-                command.Parameters.AddWithValue("@parentName", student.ParentName);
-                command.Parameters.AddWithValue("@parentPhone", student.ParentPhone);
-                command.Parameters.AddWithValue("@parentWorkplace", student.ParentWorkplace);
-                command.Parameters.AddWithValue("@notes", student.Notes);
+                AddStudentParameters(command, student);
 
                 command.ExecuteNonQuery();
                 return true;
@@ -314,20 +327,18 @@ namespace ElectronicJournal.Services
                 using var connection = new SqliteConnection(_connectionString);
                 connection.Open();
 
-                string query = "UPDATE Students SET FullName = @fullName, [Group] = @group, BirthDate = @birthDate, Phone = @phone, Email = @email, Passport = @passport, Address = @address, ParentName = @parentName, ParentPhone = @parentPhone, ParentWorkplace = @parentWorkplace, Notes = @notes WHERE Id = @id";
+                string query = @"UPDATE Students SET
+                    LastName = @lastName, FirstName = @firstName, MiddleName = @middleName,
+                    [Group] = @group, BirthDate = @birthDate, Phone = @phone, Address = @address,
+                    MotherLastName = @motherLastName, MotherFirstName = @motherFirstName, MotherMiddleName = @motherMiddleName,
+                    MotherPhone = @motherPhone, MotherWorkplace = @motherWorkplace,
+                    FatherLastName = @fatherLastName, FatherFirstName = @fatherFirstName, FatherMiddleName = @fatherMiddleName,
+                    FatherPhone = @fatherPhone, FatherWorkplace = @fatherWorkplace, Notes = @notes
+                    WHERE Id = @id";
+
                 using var command = new SqliteCommand(query, connection);
                 command.Parameters.AddWithValue("@id", student.Id);
-                command.Parameters.AddWithValue("@fullName", student.FullName);
-                command.Parameters.AddWithValue("@group", student.Group);
-                command.Parameters.AddWithValue("@birthDate", student.BirthDate.ToString("yyyy-MM-dd"));
-                command.Parameters.AddWithValue("@phone", student.Phone);
-                command.Parameters.AddWithValue("@email", student.Email);
-                command.Parameters.AddWithValue("@passport", student.Passport);
-                command.Parameters.AddWithValue("@address", student.Address);
-                command.Parameters.AddWithValue("@parentName", student.ParentName);
-                command.Parameters.AddWithValue("@parentPhone", student.ParentPhone);
-                command.Parameters.AddWithValue("@parentWorkplace", student.ParentWorkplace);
-                command.Parameters.AddWithValue("@notes", student.Notes);
+                AddStudentParameters(command, student);
 
                 command.ExecuteNonQuery();
                 return true;
@@ -336,6 +347,28 @@ namespace ElectronicJournal.Services
             {
                 return false;
             }
+        }
+
+        private void AddStudentParameters(SqliteCommand command, Student student)
+        {
+            command.Parameters.AddWithValue("@lastName", student.LastName);
+            command.Parameters.AddWithValue("@firstName", student.FirstName);
+            command.Parameters.AddWithValue("@middleName", student.MiddleName);
+            command.Parameters.AddWithValue("@group", student.Group);
+            command.Parameters.AddWithValue("@birthDate", student.BirthDate.ToString("yyyy-MM-dd"));
+            command.Parameters.AddWithValue("@phone", student.Phone);
+            command.Parameters.AddWithValue("@address", student.Address);
+            command.Parameters.AddWithValue("@motherLastName", student.MotherLastName);
+            command.Parameters.AddWithValue("@motherFirstName", student.MotherFirstName);
+            command.Parameters.AddWithValue("@motherMiddleName", student.MotherMiddleName);
+            command.Parameters.AddWithValue("@motherPhone", student.MotherPhone);
+            command.Parameters.AddWithValue("@motherWorkplace", student.MotherWorkplace);
+            command.Parameters.AddWithValue("@fatherLastName", student.FatherLastName);
+            command.Parameters.AddWithValue("@fatherFirstName", student.FatherFirstName);
+            command.Parameters.AddWithValue("@fatherMiddleName", student.FatherMiddleName);
+            command.Parameters.AddWithValue("@fatherPhone", student.FatherPhone);
+            command.Parameters.AddWithValue("@fatherWorkplace", student.FatherWorkplace);
+            command.Parameters.AddWithValue("@notes", student.Notes);
         }
 
         public bool DeleteStudent(int id)
@@ -391,7 +424,7 @@ namespace ElectronicJournal.Services
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
-            string query = @"SELECT g.*, s.FullName, sub.Name
+            string query = @"SELECT g.*, (s.LastName || ' ' || s.FirstName || ' ' || COALESCE(s.MiddleName, '')) as StudentName, sub.Name
                            FROM Grades g
                            LEFT JOIN Students s ON g.StudentId = s.Id
                            LEFT JOIN Subjects sub ON g.SubjectId = sub.Id
@@ -403,18 +436,7 @@ namespace ElectronicJournal.Services
 
             while (reader.Read())
             {
-                grades.Add(new Grade
-                {
-                    Id = reader.GetInt32(0),
-                    StudentId = reader.GetInt32(1),
-                    SubjectId = reader.GetInt32(2),
-                    GradeValue = reader.GetInt32(3),
-                    Date = DateTime.Parse(reader.GetString(4)),
-                    Topic = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                    Notes = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
-                    StudentName = reader.IsDBNull(7) ? null : reader.GetString(7),
-                    SubjectName = reader.IsDBNull(8) ? null : reader.GetString(8)
-                });
+                grades.Add(ReadGrade(reader));
             }
 
             return grades;
@@ -427,7 +449,7 @@ namespace ElectronicJournal.Services
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
-            string query = @"SELECT g.*, s.FullName, sub.Name
+            string query = @"SELECT g.*, (s.LastName || ' ' || s.FirstName || ' ' || COALESCE(s.MiddleName, '')) as StudentName, sub.Name
                            FROM Grades g
                            LEFT JOIN Students s ON g.StudentId = s.Id
                            LEFT JOIN Subjects sub ON g.SubjectId = sub.Id
@@ -437,21 +459,26 @@ namespace ElectronicJournal.Services
 
             while (reader.Read())
             {
-                grades.Add(new Grade
-                {
-                    Id = reader.GetInt32(0),
-                    StudentId = reader.GetInt32(1),
-                    SubjectId = reader.GetInt32(2),
-                    GradeValue = reader.GetInt32(3),
-                    Date = DateTime.Parse(reader.GetString(4)),
-                    Topic = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
-                    Notes = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
-                    StudentName = reader.IsDBNull(7) ? null : reader.GetString(7),
-                    SubjectName = reader.IsDBNull(8) ? null : reader.GetString(8)
-                });
+                grades.Add(ReadGrade(reader));
             }
 
             return grades;
+        }
+
+        private Grade ReadGrade(SqliteDataReader reader)
+        {
+            return new Grade
+            {
+                Id = reader.GetInt32(0),
+                StudentId = reader.GetInt32(1),
+                SubjectId = reader.GetInt32(2),
+                GradeValue = reader.GetInt32(3),
+                Date = DateTime.Parse(reader.GetString(4)),
+                Topic = reader.IsDBNull(5) ? string.Empty : reader.GetString(5),
+                Notes = reader.IsDBNull(6) ? string.Empty : reader.GetString(6),
+                StudentName = reader.IsDBNull(7) ? null : reader.GetString(7),
+                SubjectName = reader.IsDBNull(8) ? null : reader.GetString(8)
+            };
         }
 
         public bool AddGrade(Grade grade)
@@ -507,7 +534,7 @@ namespace ElectronicJournal.Services
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
-            string query = @"SELECT a.*, s.FullName
+            string query = @"SELECT a.*, (s.LastName || ' ' || s.FirstName || ' ' || COALESCE(s.MiddleName, '')) as StudentName
                            FROM Attendance a
                            LEFT JOIN Students s ON a.StudentId = s.Id
                            WHERE a.StudentId = @studentId
@@ -518,15 +545,7 @@ namespace ElectronicJournal.Services
 
             while (reader.Read())
             {
-                attendance.Add(new Attendance
-                {
-                    Id = reader.GetInt32(0),
-                    StudentId = reader.GetInt32(1),
-                    Date = DateTime.Parse(reader.GetString(2)),
-                    Status = reader.GetString(3),
-                    Reason = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
-                    StudentName = reader.IsDBNull(5) ? null : reader.GetString(5)
-                });
+                attendance.Add(ReadAttendance(reader));
             }
 
             return attendance;
@@ -539,7 +558,7 @@ namespace ElectronicJournal.Services
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
 
-            string query = @"SELECT a.*, s.FullName
+            string query = @"SELECT a.*, (s.LastName || ' ' || s.FirstName || ' ' || COALESCE(s.MiddleName, '')) as StudentName
                            FROM Attendance a
                            LEFT JOIN Students s ON a.StudentId = s.Id
                            ORDER BY a.Date DESC";
@@ -548,18 +567,23 @@ namespace ElectronicJournal.Services
 
             while (reader.Read())
             {
-                attendance.Add(new Attendance
-                {
-                    Id = reader.GetInt32(0),
-                    StudentId = reader.GetInt32(1),
-                    Date = DateTime.Parse(reader.GetString(2)),
-                    Status = reader.GetString(3),
-                    Reason = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
-                    StudentName = reader.IsDBNull(5) ? null : reader.GetString(5)
-                });
+                attendance.Add(ReadAttendance(reader));
             }
 
             return attendance;
+        }
+
+        private Attendance ReadAttendance(SqliteDataReader reader)
+        {
+            return new Attendance
+            {
+                Id = reader.GetInt32(0),
+                StudentId = reader.GetInt32(1),
+                Date = DateTime.Parse(reader.GetString(2)),
+                Status = reader.GetString(3),
+                Reason = reader.IsDBNull(4) ? string.Empty : reader.GetString(4),
+                StudentName = reader.IsDBNull(5) ? null : reader.GetString(5)
+            };
         }
 
         public bool AddAttendance(Attendance attendance)

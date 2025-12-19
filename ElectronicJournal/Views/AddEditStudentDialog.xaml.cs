@@ -20,33 +20,50 @@ namespace ElectronicJournal.Views
 
             if (_isEditMode && _studentToEdit != null)
             {
-                TitleTextBlock.Text = "Редактировать студента";
-                FullNameTextBox.Text = _studentToEdit.FullName;
+                TitleTextBlock.Text = "Редактирование данных студента";
+
+                // Личные данные студента
+                LastNameTextBox.Text = _studentToEdit.LastName;
+                FirstNameTextBox.Text = _studentToEdit.FirstName;
+                MiddleNameTextBox.Text = _studentToEdit.MiddleName;
                 GroupTextBox.Text = _studentToEdit.Group;
                 BirthDatePicker.SelectedDate = _studentToEdit.BirthDate;
                 PhoneTextBox.Text = _studentToEdit.Phone;
-                EmailTextBox.Text = _studentToEdit.Email;
-                PassportTextBox.Text = _studentToEdit.Passport;
                 AddressTextBox.Text = _studentToEdit.Address;
-                ParentNameTextBox.Text = _studentToEdit.ParentName;
-                ParentPhoneTextBox.Text = _studentToEdit.ParentPhone;
-                ParentWorkplaceTextBox.Text = _studentToEdit.ParentWorkplace;
+
+                // Данные матери
+                MotherLastNameTextBox.Text = _studentToEdit.MotherLastName;
+                MotherFirstNameTextBox.Text = _studentToEdit.MotherFirstName;
+                MotherMiddleNameTextBox.Text = _studentToEdit.MotherMiddleName;
+                MotherPhoneTextBox.Text = _studentToEdit.MotherPhone;
+                MotherWorkplaceTextBox.Text = _studentToEdit.MotherWorkplace;
+
+                // Данные отца
+                FatherLastNameTextBox.Text = _studentToEdit.FatherLastName;
+                FatherFirstNameTextBox.Text = _studentToEdit.FatherFirstName;
+                FatherMiddleNameTextBox.Text = _studentToEdit.FatherMiddleName;
+                FatherPhoneTextBox.Text = _studentToEdit.FatherPhone;
+                FatherWorkplaceTextBox.Text = _studentToEdit.FatherWorkplace;
+
+                // Дополнительно
                 NotesTextBox.Text = _studentToEdit.Notes;
             }
             else
             {
-                BirthDatePicker.SelectedDate = DateTime.Now.AddYears(-15);
+                BirthDatePicker.SelectedDate = DateTime.Now.AddYears(-17);
             }
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(FullNameTextBox.Text) ||
+            // Проверка обязательных полей
+            if (string.IsNullOrWhiteSpace(LastNameTextBox.Text) ||
+                string.IsNullOrWhiteSpace(FirstNameTextBox.Text) ||
                 string.IsNullOrWhiteSpace(GroupTextBox.Text) ||
                 BirthDatePicker.SelectedDate == null)
             {
-                MessageBox.Show("Пожалуйста, заполните все обязательные поля (ФИО, Группа, Дата рождения)",
-                              "Предупреждение",
+                MessageBox.Show("Пожалуйста, заполните все обязательные поля:\n- Фамилия\n- Имя\n- Группа\n- Дата рождения",
+                              "Внимание",
                               MessageBoxButton.OK,
                               MessageBoxImage.Warning);
                 return;
@@ -54,16 +71,30 @@ namespace ElectronicJournal.Views
 
             var student = new Student
             {
-                FullName = FullNameTextBox.Text.Trim(),
+                // Личные данные студента
+                LastName = LastNameTextBox.Text.Trim(),
+                FirstName = FirstNameTextBox.Text.Trim(),
+                MiddleName = MiddleNameTextBox.Text.Trim(),
                 Group = GroupTextBox.Text.Trim(),
                 BirthDate = BirthDatePicker.SelectedDate.Value,
                 Phone = PhoneTextBox.Text.Trim(),
-                Email = EmailTextBox.Text.Trim(),
-                Passport = PassportTextBox.Text.Trim(),
                 Address = AddressTextBox.Text.Trim(),
-                ParentName = ParentNameTextBox.Text.Trim(),
-                ParentPhone = ParentPhoneTextBox.Text.Trim(),
-                ParentWorkplace = ParentWorkplaceTextBox.Text.Trim(),
+
+                // Данные матери
+                MotherLastName = MotherLastNameTextBox.Text.Trim(),
+                MotherFirstName = MotherFirstNameTextBox.Text.Trim(),
+                MotherMiddleName = MotherMiddleNameTextBox.Text.Trim(),
+                MotherPhone = MotherPhoneTextBox.Text.Trim(),
+                MotherWorkplace = MotherWorkplaceTextBox.Text.Trim(),
+
+                // Данные отца
+                FatherLastName = FatherLastNameTextBox.Text.Trim(),
+                FatherFirstName = FatherFirstNameTextBox.Text.Trim(),
+                FatherMiddleName = FatherMiddleNameTextBox.Text.Trim(),
+                FatherPhone = FatherPhoneTextBox.Text.Trim(),
+                FatherWorkplace = FatherWorkplaceTextBox.Text.Trim(),
+
+                // Дополнительно
                 Notes = NotesTextBox.Text.Trim()
             };
 
@@ -80,8 +111,8 @@ namespace ElectronicJournal.Views
 
             if (success)
             {
-                MessageBox.Show(_isEditMode ? "Студент успешно обновлен" : "Студент успешно добавлен",
-                              "Успех",
+                MessageBox.Show(_isEditMode ? "Данные студента успешно обновлены" : "Студент успешно добавлен в систему",
+                              "Успешно",
                               MessageBoxButton.OK,
                               MessageBoxImage.Information);
                 DialogResult = true;
@@ -89,7 +120,7 @@ namespace ElectronicJournal.Views
             }
             else
             {
-                MessageBox.Show("Ошибка при сохранении данных",
+                MessageBox.Show("Произошла ошибка при сохранении данных. Попробуйте еще раз.",
                               "Ошибка",
                               MessageBoxButton.OK,
                               MessageBoxImage.Error);
